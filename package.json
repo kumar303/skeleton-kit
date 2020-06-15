@@ -1,0 +1,39 @@
+{
+  "name": "skeleton-kit",
+  "version": "1.0.0",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
+  "files": [
+    "src/"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf build && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "yarn build",
+    "storybook": "start-storybook -p 6006",
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/react": "^5.3.19",
+    "@types/storybook__addon-actions": "^5.2.1",
+    "@types/storybook__addon-links": "^5.2.1",
+    "@types/styled-components": "^5.1.0",
+    "babel-loader": "^8.1.0",
+    "prettier": "^2.0.5",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5"
+  }
+}
