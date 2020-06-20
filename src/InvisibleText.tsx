@@ -3,13 +3,14 @@ import styled from "styled-components";
 
 type Props = {
   children: string;
+  className?: string;
 };
 
 const Span = styled.span`
   visibility: hidden;
 `;
 
-export default function Text({ children }: Props) {
+export default function Text({ children, className }: Props) {
   // TODO: accessibility
-  return <Span>{children}</Span>;
+  return <Span className={className}>{children}</Span>;
 }

@@ -11,11 +11,15 @@ import { ThemedStyledFunction } from "styled-components";
 // https://github.com/styled-components/styled-components/issues/630#issuecomment-473901594
 export function addStyleProps<ExtraProps>() {
   return <
-    P extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
-    T extends object,
-    O extends object = {}
+    Cmp extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
+    Theme extends object,
+    Opt extends object = {}
   >(
-    fn: ThemedStyledFunction<P, T, O>
-  ): ThemedStyledFunction<P & ExtraProps, T, O & ExtraProps> =>
-    (fn as unknown) as ThemedStyledFunction<P & ExtraProps, T, O & ExtraProps>;
+    fn: ThemedStyledFunction<Cmp, Theme, Opt>
+  ): ThemedStyledFunction<Cmp & ExtraProps, Theme, Opt & ExtraProps> =>
+    (fn as unknown) as ThemedStyledFunction<
+      Cmp & ExtraProps,
+      Theme,
+      Opt & ExtraProps
+    >;
 }

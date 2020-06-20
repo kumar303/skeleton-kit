@@ -1,42 +1,47 @@
 import * as React from "react";
-import styled from "styled-components";
-
-type Props = {
-  children: string;
-  asSkeleton?: boolean;
-};
+import styled, { keyframes } from "styled-components";
 
 const Outer = styled.div`
   transform: translateY(1em);
 `;
 
+const pulse = keyframes`
+  0% {
+    background-color: rgba(129, 129, 129, 0.5);
+  }
+  50% {
+    background-color: rgb(129, 129, 129, 1);
+  }
+  100% {
+    background-color: rgba(129, 129, 129, 0.5);
+  }
+`;
+
 const Inner = styled.span`
   border-top: 0.9em solid;
-  animation: SkeletonTextPulse 2s infinite ease-in-out;
-
-  @keyframes SkeletonTextPulse {
-    0% {
-      border-color: rgba(129, 129, 129, 0.5);
-    }
-    50% {
-      border-color: rgb(129, 129, 129, 1);
-    }
-    100% {
-      border-color: rgba(129, 129, 129, 0.5);
-    }
-  }
+  animation: ${pulse} 2s infinite ease-in-out;
 `;
 
 const WrappedText = styled.span`
   visibility: hidden;
 `;
 
-export default function Text({ asSkeleton = false, children }: Props) {
+type Props = {
+  children: string;
+  className?: string;
+  asSkeleton?: boolean;
+};
+
+export default function Text({
+  asSkeleton = false,
+  children,
+  className,
+}: Props) {
   if (!asSkeleton) {
     return <>{children}</>;
   }
   return (
-    <Outer>
+    <Outer className={className}>
       <Inner>
         <WrappedText>{children}</WrappedText>
       </Inner>

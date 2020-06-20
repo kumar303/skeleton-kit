@@ -1,5 +1,5 @@
 import Phrase from "./Phrase";
 import Skeleton from "./Skeleton";
-import Text from "./Text";
+import SimulatedText from "./SimulatedText";
 
-export { Phrase, Skeleton, Text };
+export { Phrase, Skeleton, SimulatedText };
