@@ -32,7 +32,7 @@ type Props = {
   asSkeleton?: boolean;
 };
 
-export default function Text({
+export default function BorderText({
   asSkeleton = false,
   children,
   className,
