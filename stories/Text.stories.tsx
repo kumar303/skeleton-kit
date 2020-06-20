@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Phrase from "../src/Phrase";
-import SimulatedText from "../src/SimulatedText";
+import Text from "../src/RealText";
 
 const Grid = styled.div`
   // TODO: Move this, probably.
@@ -45,7 +45,7 @@ const Grid = styled.div`
   }
 
   p {
-    line-height: 1.2;
+    line-height: 1.3;
   }
 `;
 
@@ -59,26 +59,26 @@ function renderExample({ asSkeleton = false } = {}) {
         <Phrase asSkeleton={asSkeleton}>Something else secondary</Phrase>
       </h3>
       <p>
-        <SimulatedText asSkeleton={asSkeleton}>
+        <Text asSkeleton={asSkeleton}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ex
           felis, ullamcorper at interdum vel, auctor ac magna. Donec non rutrum
           mi. Quisque quis tellus fermentum, pretium est sed, accumsan purus.
-        </SimulatedText>
+        </Text>
       </p>
       <p>
-        <SimulatedText asSkeleton={asSkeleton}>
+        <Text asSkeleton={asSkeleton}>
           Nulla purus massa, scelerisque in tellus cursus, scelerisque feugiat
           eros. Aenean ut urna sit amet orci luctus vestibulum. Vivamus libero
           dolor, varius eu volutpat et, tempus vel tortor. Praesent ut tortor
           turpis.
-        </SimulatedText>
+        </Text>
       </p>
       <p>
-        <SimulatedText asSkeleton={asSkeleton}>
+        <Text asSkeleton={asSkeleton}>
           Morbi sit amet arcu ac felis sollicitudin malesuada. Mauris non
           laoreet enim. Integer tortor quam, dapibus non laoreet et, tincidunt
           sed odio.
-        </SimulatedText>
+        </Text>
       </p>
     </>
   );

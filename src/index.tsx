@@ -1,5 +1,7 @@
+import BlockText from "./BlockText";
 import Phrase from "./Phrase";
-import Skeleton from "./Skeleton";
+import RealText from "./RealText";
 import SimulatedText from "./SimulatedText";
+import Skeleton from "./Skeleton";
 
-export { Phrase, Skeleton, SimulatedText };
+export { BlockText, Phrase, RealText, SimulatedText, Skeleton };
