@@ -1,20 +1,11 @@
 import * as React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-const pulse = keyframes`
-  0% {
-    background-color: rgba(129, 129, 129, 0.5);
-  }
-  50% {
-    background-color: rgb(129, 129, 129, 1);
-  }
-  100% {
-    background-color: rgba(129, 129, 129, 0.5);
-  }
-`;
+import OpacityPulse from "./OpacityPulse";
 
-const StyledSpan = styled.span`
-  animation: ${pulse} 2s infinite ease-in-out;
+const StyledSpan = styled(OpacityPulse)`
+  // TODO: use bg color theme vars
+  background-color: rgb(129, 129, 129, 1);
 `;
 
 export type Props = {

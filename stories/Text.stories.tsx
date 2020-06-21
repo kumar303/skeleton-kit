@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import Phrase from "../src/Phrase";
 import Text from "../src/RealText";
+// import Text from "../src/SimulatedText";
+// import Text from "../src/BorderText";
 
 const Grid = styled.div`
   // TODO: Move this, probably.

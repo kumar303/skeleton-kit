@@ -1,25 +1,15 @@
 import * as React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+
+import OpacityPulse from "./OpacityPulse";
 
 const Outer = styled.div`
   transform: translateY(1em);
 `;
 
-const pulse = keyframes`
-  0% {
-    background-color: rgba(129, 129, 129, 0.5);
-  }
-  50% {
-    background-color: rgb(129, 129, 129, 1);
-  }
-  100% {
-    background-color: rgba(129, 129, 129, 0.5);
-  }
-`;
-
-const Inner = styled.span`
-  border-top: 0.9em solid;
-  animation: ${pulse} 2s infinite ease-in-out;
+const Inner = styled(OpacityPulse)`
+  // TODO: use bg color theme vars
+  border-top: 0.9em solid rgb(129, 129, 129, 1);
 `;
 
 const WrappedText = styled.span`
