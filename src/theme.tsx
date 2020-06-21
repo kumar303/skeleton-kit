@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
+// TODO: add type safety (as documented) to components that use the theme.
 export type SkeletonTheme = {
   skeletonColor?: string;
   showSkeletons?: boolean;
