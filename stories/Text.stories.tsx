@@ -92,7 +92,7 @@ function renderExample({ asSkeleton = false } = {}) {
 
 function App() {
   return (
-    <SkeletonGroup skeletonColor="#c0e4fc">
+    <SkeletonGroup skeletonBorderRadius="0.4rem" skeletonColor="#c0e4fc">
       <Grid>
         <div>{renderExample()}</div>
         <div>{renderExample({ asSkeleton: true })}</div>

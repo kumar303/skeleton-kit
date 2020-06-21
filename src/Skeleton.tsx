@@ -4,8 +4,9 @@ import styled from "styled-components";
 import OpacityPulse from "./OpacityPulse";
 
 const StyledSpan = styled(OpacityPulse)`
-  // TODO: use bg color theme vars
   background-color: ${(props) => props.theme.skeletonColor};
+  border-radius: ${(props) => props.theme.skeletonBorderRadius};
+  box-decoration-break: clone;
 `;
 
 export interface Props {
