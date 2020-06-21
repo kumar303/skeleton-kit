@@ -1,5 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import { Reset } from "styled-reset";
 
 import {
   Phrase,
@@ -8,6 +9,12 @@ import {
   // SimulatedText as Text,
   // BorderText as Text,
 } from "../src/";
+
+const GlobalStyle = createGlobalStyle`
+  html {
+    font-size: 16px;
+  }
+`;
 
 const Grid = styled.div`
   // TODO: Move this, probably.
@@ -26,13 +33,12 @@ const Grid = styled.div`
   * {
     box-sizing: border-box;
     color: #3c3c3c;
-    margin: 0;
-    padding: 0;
   }
 
   display: grid;
-  grid-gap: 0.5rem;
+  grid-gap: 1rem;
   grid-template-columns: auto auto;
+  margin: 1rem;
 
   h1,
   h2,
@@ -40,18 +46,25 @@ const Grid = styled.div`
   h4,
   h5,
   p {
-    border: 1px dotted #fb9fc1;
+    border: 0.09rem dotted #fb9fc1;
     margin-bottom: 1rem;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   h1 {
-    line-height: 1.5;
+    font-size: 4rem;
+    line-height: 1.4;
     margin: 0 0 1.5rem;
   }
 
+  h2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
   p {
-    line-height: 1.3;
+    font-size: 1.1rem;
+    line-height: 1.4;
   }
 `;
 
@@ -61,9 +74,9 @@ function renderExample({ asSkeleton = false } = {}) {
       <h1>
         <Phrase>This is a headline</Phrase>
       </h1>
-      <h3>
+      <h2>
         <Phrase>Something else secondary</Phrase>
-      </h3>
+      </h2>
       <p>
         <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ex
@@ -93,6 +106,8 @@ function renderExample({ asSkeleton = false } = {}) {
 function App() {
   return (
     <SkeletonGroup borderRadius="0.4rem" color="#c0e4fc">
+      <Reset />
+      <GlobalStyle />
       <Grid>
         <div>{renderExample()}</div>
         <div>{renderExample({ asSkeleton: true })}</div>

@@ -7923,6 +7923,11 @@ styled-components@^5.1.1:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
+styled-reset@^4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.1.6.tgz#c3f5927552d90f0d65e45bb654c24e2a68b669fb"
+  integrity sha512-ttktpWqPNk9MYRPgRTEwx1WLN3ALlXzAGyC1u6xbKOeNGDsN6AJ0z1O3BFYz7epkiMKlF50whlM/IT/IY+attQ==
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
