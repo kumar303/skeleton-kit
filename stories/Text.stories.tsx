@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import Phrase from "../src/Phrase";
-import Text from "../src/RealText";
-// import Text from "../src/SimulatedText";
-// import Text from "../src/BorderText";
+import {
+  Phrase,
+  SkeletonGroup,
+  RealText as Text,
+  // SimulatedText as Text,
+  // BorderText as Text,
+} from "../src/";
 
 const Grid = styled.div`
   // TODO: Move this, probably.
@@ -22,6 +25,7 @@ const Grid = styled.div`
 
   * {
     box-sizing: border-box;
+    color: #3c3c3c;
     margin: 0;
     padding: 0;
   }
@@ -36,7 +40,7 @@ const Grid = styled.div`
   h4,
   h5,
   p {
-    border: 1px dotted lightgray;
+    border: 1px dotted #fb9fc1;
     margin-bottom: 1rem;
     padding: 0.5rem;
   }
@@ -53,22 +57,22 @@ const Grid = styled.div`
 
 function renderExample({ asSkeleton = false } = {}) {
   return (
-    <>
+    <SkeletonGroup showSkeletons={asSkeleton}>
       <h1>
-        <Phrase asSkeleton={asSkeleton}>This is a headline</Phrase>
+        <Phrase>This is a headline</Phrase>
       </h1>
       <h3>
-        <Phrase asSkeleton={asSkeleton}>Something else secondary</Phrase>
+        <Phrase>Something else secondary</Phrase>
       </h3>
       <p>
-        <Text asSkeleton={asSkeleton}>
+        <Text>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ex
           felis, ullamcorper at interdum vel, auctor ac magna. Donec non rutrum
           mi. Quisque quis tellus fermentum, pretium est sed, accumsan purus.
         </Text>
       </p>
       <p>
-        <Text asSkeleton={asSkeleton}>
+        <Text>
           Nulla purus massa, scelerisque in tellus cursus, scelerisque feugiat
           eros. Aenean ut urna sit amet orci luctus vestibulum. Vivamus libero
           dolor, varius eu volutpat et, tempus vel tortor. Praesent ut tortor
@@ -76,22 +80,24 @@ function renderExample({ asSkeleton = false } = {}) {
         </Text>
       </p>
       <p>
-        <Text asSkeleton={asSkeleton}>
+        <Text>
           Morbi sit amet arcu ac felis sollicitudin malesuada. Mauris non
           laoreet enim. Integer tortor quam, dapibus non laoreet et, tincidunt
           sed odio.
         </Text>
       </p>
-    </>
+    </SkeletonGroup>
   );
 }
 
 function App() {
   return (
-    <Grid>
-      <div>{renderExample()}</div>
-      <div>{renderExample({ asSkeleton: true })}</div>
-    </Grid>
+    <SkeletonGroup skeletonColor="#c0e4fc">
+      <Grid>
+        <div>{renderExample()}</div>
+        <div>{renderExample({ asSkeleton: true })}</div>
+      </Grid>
+    </SkeletonGroup>
   );
 }
 

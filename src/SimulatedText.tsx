@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
+import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
 import { addStyleProps } from "./util/styleUtils";
@@ -44,15 +45,11 @@ const SkeletonLine = styled(Skeleton)`
 type Props = {
   children: string;
   className?: string;
-  asSkeleton?: boolean;
 };
 
-export default function SimulatedText({
-  asSkeleton = false,
-  children,
-  className,
-}: Props) {
-  if (!asSkeleton) {
+export default function SimulatedText({ children, className }: Props) {
+  const theme = useTheme();
+  if (!theme.showSkeletons) {
     return <>{children}</>;
   }
 
@@ -76,16 +73,7 @@ export default function SimulatedText({
     }
   }, [shell]);
 
-  // if (boxWidth && boxHeight && lineHeight) {
-  //   console.log("Computed box height:", boxHeight);
-  //   console.log("Computed box width:", boxWidth);
-  //   console.log("Computed line height:", lineHeight);
-  // }
-
   if (boxWidth && boxHeight && lineHeight) {
-    console.log("Computed box height:", boxHeight);
-    console.log("Computed box width:", boxWidth);
-    console.log("Computed line height:", lineHeight);
     // TODO: check rounding
     return (
       <RecreatedSpan

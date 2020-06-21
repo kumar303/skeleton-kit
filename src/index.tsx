@@ -1,7 +1,6 @@
-import BorderText from "./BorderText";
-import Phrase from "./Phrase";
-import RealText from "./RealText";
-import SimulatedText from "./SimulatedText";
-import Skeleton from "./Skeleton";
-
-export { BorderText, Phrase, RealText, SimulatedText, Skeleton };
+export { default as BorderText } from "./BorderText";
+export { default as Phrase } from "./Phrase";
+export { default as RealText } from "./RealText";
+export { default as SimulatedText } from "./SimulatedText";
+export { default as Skeleton } from "./Skeleton";
+export { default as SkeletonGroup } from "./SkeletonGroup";

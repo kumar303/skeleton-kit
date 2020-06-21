@@ -5,7 +5,7 @@ import OpacityPulse from "./OpacityPulse";
 
 const StyledSpan = styled(OpacityPulse)`
   // TODO: use bg color theme vars
-  background-color: rgb(129, 129, 129, 1);
+  background-color: ${(props) => props.theme.skeletonColor};
 `;
 
 export type Props = {

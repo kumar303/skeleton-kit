@@ -1,6 +1,7 @@
-import * as React from "react";
+import React from "react";
 import styled from "styled-components";
 
+import { useTheme } from "./theme";
 import OpacityPulse from "./OpacityPulse";
 
 const Outer = styled.div`
@@ -8,8 +9,7 @@ const Outer = styled.div`
 `;
 
 const Inner = styled(OpacityPulse)`
-  // TODO: use bg color theme vars
-  border-top: 0.9em solid rgb(129, 129, 129, 1);
+  border-top: ${(props) => `0.9em solid ${props.theme.skeletonColor}`};
 `;
 
 const WrappedText = styled.span`
@@ -19,15 +19,11 @@ const WrappedText = styled.span`
 type Props = {
   children: string;
   className?: string;
-  asSkeleton?: boolean;
 };
 
-export default function BorderText({
-  asSkeleton = false,
-  children,
-  className,
-}: Props) {
-  if (!asSkeleton) {
+export default function BorderText({ children, className }: Props) {
+  const theme = useTheme();
+  if (!theme.showSkeletons) {
     return <>{children}</>;
   }
   return (
