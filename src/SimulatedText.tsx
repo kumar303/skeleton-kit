@@ -11,12 +11,12 @@ const RefSpan = styled.span`
   padding: 0;
 `;
 
-type StyleProps = {
+interface StyleProps {
   children?: React.ReactNode;
   className?: string;
   pixelHeight?: number;
   pixelWidth?: number;
-};
+}
 
 const RecreatedSpan = styled(RefSpan)<StyleProps>`
   align-items: center;
@@ -41,10 +41,10 @@ const SkeletonLine = styled(Skeleton)`
   width: 100%;
 `;
 
-type Props = {
+interface Props {
   children: string;
   className?: string;
-};
+}
 
 export default function SimulatedText({ children, className }: Props) {
   const theme = useTheme();

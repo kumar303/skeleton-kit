@@ -16,10 +16,10 @@ const WrappedText = styled.span`
   visibility: hidden;
 `;
 
-type Props = {
+interface Props {
   children: string;
   className?: string;
-};
+}
 
 export default function BorderText({ children, className }: Props) {
   const theme = useTheme();

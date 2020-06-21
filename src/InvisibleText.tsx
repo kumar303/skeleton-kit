@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 
-type Props = {
+interface Props {
   children: string;
   className?: string;
-};
+}
 
 const Span = styled.span`
   visibility: hidden;

@@ -3,9 +3,9 @@ import { ThemeContext, ThemeProvider } from "styled-components";
 
 import { getAppliedTheme, SkeletonTheme } from "./theme";
 
-type Props = SkeletonTheme & {
+interface Props extends SkeletonTheme {
   children: React.ReactNode;
-};
+}
 
 export default function SkeletonGroup({ children, ...theme }: Props) {
   const themeContext = useContext(ThemeContext);
