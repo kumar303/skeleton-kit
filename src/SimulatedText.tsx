@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
-import { addStyleProps } from "./util/styleUtils";
 
 const RefSpan = styled.span`
   box-sizing: border-box;
@@ -19,7 +18,7 @@ type StyleProps = {
   pixelWidth?: number;
 };
 
-const RecreatedSpan = addStyleProps<StyleProps>()(styled(RefSpan))`
+const RecreatedSpan = styled(RefSpan)<StyleProps>`
   align-items: center;
   display: flex;
   flex-direction: column;
