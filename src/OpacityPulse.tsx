@@ -23,8 +23,8 @@ const pulseOpacity = keyframes`
 `;
 
 const OpacityPulse = styled.span`
-  animation: ${pulseOpacity} infinite ease-in-out;
-  animation-duration: ${() => `${Math.random() * 1 + 3.75}s`};
+  animation: ${pulseOpacity} infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+  animation-duration: ${() => `${Math.random() * 1.5 + 2}s`};
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
