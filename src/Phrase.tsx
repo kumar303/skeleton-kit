@@ -4,7 +4,7 @@ import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
 
-interface Props {
+export interface Props {
   children: string;
   className?: string;
 }
