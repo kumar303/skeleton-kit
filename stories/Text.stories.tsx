@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Grid = styled.div`
+const Grid = styled.div<{ pLineHeight: string }>`
   // TODO: Move this, probably.
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -65,8 +65,13 @@ const Grid = styled.div`
 
   p {
     font-size: 1.1rem;
-    line-height: 1.4;
+    line-height: ${(props) => props.pLineHeight};
   }
+`;
+
+const TextStrategy = styled.h2`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const textImpl = {
@@ -90,31 +95,41 @@ function renderExample({ asSkeleton = false } = {}) {
   return (
     <SkeletonGroup showSkeletons={asSkeleton}>
       <h1>
-        <Phrase>This is a headline</Phrase>
+        <Phrase>Loaded vs. Loading</Phrase>
       </h1>
-      <h2>
-        <Phrase>Something else secondary</Phrase>
-      </h2>
+      <TextStrategy>
+        <Phrase>Text strategy</Phrase>
+        <Phrase>realistic</Phrase>
+      </TextStrategy>
       <p>
         <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ex
-          felis, ullamcorper at interdum vel, auctor ac magna. Donec non rutrum
-          mi. Quisque quis tellus fermentum, pretium est sed, accumsan purus.
+          Notice how the skeletons on the right mirror the layout. They preserve
+          line-height, padding, and block height. This technique has some
+          limitations, though. For example, you can adjust the line-height to
+          see how the paragraph skeletons squish together as you approach
+          numbers like 1.1.
         </Text>
       </p>
+      <TextStrategy>
+        <Phrase>Text strategy</Phrase>
+        <Phrase>simulated</Phrase>
+      </TextStrategy>
       <p>
         <Text>
-          Nulla purus massa, scelerisque in tellus cursus, scelerisque feugiat
-          eros. Aenean ut urna sit amet orci luctus vestibulum. Vivamus libero
-          dolor, varius eu volutpat et, tempus vel tortor. Praesent ut tortor
-          turpis.
+          Try switching to a simulated text strategy and a line-height of 1.1.
+          This allows the skeleton line to be any height but, as you can see, it
+          doesn't perfectly mirror the block height.
         </Text>
       </p>
+      <TextStrategy>
+        <Phrase>Text strategy</Phrase>
+        <Phrase>border-hack</Phrase>
+      </TextStrategy>
       <p>
         <Text>
-          Morbi sit amet arcu ac felis sollicitudin malesuada. Mauris non
-          laoreet enim. Integer tortor quam, dapibus non laoreet et, tincidunt
-          sed odio.
+          This uses a border-top to render skeleton lines. It handles tight
+          line-heights better but you can't use rounded corners with this
+          implementation.
         </Text>
       </p>
     </SkeletonGroup>
@@ -133,7 +148,7 @@ function App() {
     >
       <Reset />
       <GlobalStyle />
-      <Grid>
+      <Grid pLineHeight={text("Paragraph line-height", "1.4")}>
         <div>{renderExample()}</div>
         <div>{renderExample({ asSkeleton: true })}</div>
       </Grid>
@@ -141,12 +156,17 @@ function App() {
   );
 }
 
+export const LoadedVsLoading = () => <App />;
+
+// Figure out how to type this:
+// LoadedVsLoading.story {
+//   name: 'Loaded vs. Loading'
+// }
+
 export default {
   title: "Text",
-  component: App,
+  component: LoadedVsLoading,
 };
-
-export const HeadlineWithText = () => <App />;
 
 // export const Emoji = () => (
 //   <Button>

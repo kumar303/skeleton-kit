@@ -12,8 +12,7 @@ export interface Props {
 export default function Phrase({ children, className }: Props) {
   const theme = useTheme();
   if (!theme.showSkeletons) {
-    // TODO: think about the implications of not applying className here.
-    return <>{children}</>;
+    return <span className={className}>{children}</span>;
   }
   return (
     <Skeleton className={className}>

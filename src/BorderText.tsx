@@ -9,7 +9,7 @@ const Outer = styled.div`
 `;
 
 const Inner = styled(OpacityPulse)`
-  border-top: ${(props) => `0.9em solid ${props.theme.color}`};
+  border-top: ${(props) => `0.8em solid ${props.theme.color}`};
 `;
 
 const WrappedText = styled.span`
