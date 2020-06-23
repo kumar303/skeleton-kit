@@ -1,13 +1,14 @@
 import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { Reset } from "styled-reset";
+import { radios, text, boolean, number } from "@storybook/addon-knobs";
 
 import {
   Phrase,
   SkeletonGroup,
-  RealText as Text,
-  // SimulatedText as Text,
-  // BorderText as Text,
+  RealText,
+  SimulatedText,
+  BorderText,
 } from "../src/";
 
 const GlobalStyle = createGlobalStyle`
@@ -68,7 +69,24 @@ const Grid = styled.div`
   }
 `;
 
+const textImpl = {
+  realistic: RealText,
+  simulated: SimulatedText,
+  "border-hack": BorderText,
+};
+
 function renderExample({ asSkeleton = false } = {}) {
+  const Text =
+    textImpl[
+      radios(
+        "Text strategy",
+        // Zip the keys into an options object.
+        Object.keys(textImpl).reduce((a, k) => {
+          return { ...a, [k]: k };
+        }, {}),
+        "realistic"
+      )
+    ];
   return (
     <SkeletonGroup showSkeletons={asSkeleton}>
       <h1>
@@ -105,7 +123,14 @@ function renderExample({ asSkeleton = false } = {}) {
 
 function App() {
   return (
-    <SkeletonGroup borderRadius="0.4rem" color="#c0e4fc">
+    <SkeletonGroup
+      borderRadius={radios(
+        "borderRadius",
+        { none: "none", "0.4rem": "0.4rem" },
+        "none"
+      )}
+      color="#c0e4fc"
+    >
       <Reset />
       <GlobalStyle />
       <Grid>
