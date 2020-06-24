@@ -19,7 +19,7 @@ describe(__filename, () => {
     const className = "MyCoolClass";
     const root = render({ className });
 
-    expect(root.find("span")).toHaveClassName(className);
+    expect(root.childAt(0)).toHaveClassName(className);
   });
 
   it("lets you change the color", () => {

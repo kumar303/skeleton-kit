@@ -27,13 +27,6 @@ describe(__filename, () => {
     expect(root.find(InvisibleText)).toHaveLength(0);
   });
 
-  it("adds className when not showing skeletons", () => {
-    const className = "MyCoolClass";
-    const root = render({ showSkeletons: false, className });
-
-    expect(root.find("span")).toHaveClassName(className);
-  });
-
   it("renders invisible text when showing skeletons", () => {
     const children = "Some text";
     const root = render({ showSkeletons: true, children });
@@ -42,10 +35,17 @@ describe(__filename, () => {
     expect(root.find(InvisibleText)).toHaveLength(1);
   });
 
+  it("adds className when not showing skeletons", () => {
+    const className = "MyCoolClass";
+    const root = render({ showSkeletons: false, className });
+
+    expect(root.childAt(0)).toHaveClassName(className);
+  });
+
   it("adds className when showing skeletons", () => {
     const className = "MyCoolClass";
     const root = render({ showSkeletons: true, className });
 
-    expect(root.find(Skeleton)).toHaveClassName(className);
+    expect(root.childAt(0)).toHaveClassName(className);
   });
 });

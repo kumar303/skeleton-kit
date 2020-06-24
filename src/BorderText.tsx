@@ -2,21 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 import { useTheme } from "./theme";
+import InvisibleText from "./InvisibleText";
 import OpacityPulse from "./OpacityPulse";
 
-const Outer = styled.div`
+const Shell = styled.span`
+  display: block;
   transform: translateY(1em);
 `;
 
-const Inner = styled(OpacityPulse)`
+const BorderSkeleton = styled(OpacityPulse)`
   border-top: ${(props) => `0.8em solid ${props.theme.color}`};
 `;
 
-const WrappedText = styled.span`
-  visibility: hidden;
-`;
-
-interface Props {
+export interface Props {
   children: string;
   className?: string;
 }
@@ -24,13 +22,13 @@ interface Props {
 export default function BorderText({ children, className }: Props) {
   const theme = useTheme();
   if (!theme.showSkeletons) {
-    return <>{children}</>;
+    return <span className={className}>{children}</span>;
   }
   return (
-    <Outer className={className}>
-      <Inner>
-        <WrappedText>{children}</WrappedText>
-      </Inner>
-    </Outer>
+    <Shell className={className}>
+      <BorderSkeleton>
+        <InvisibleText>{children}</InvisibleText>
+      </BorderSkeleton>
+    </Shell>
   );
 }
