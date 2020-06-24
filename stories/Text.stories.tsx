@@ -158,20 +158,11 @@ function App() {
 
 export const LoadedVsLoading = () => <App />;
 
-// Figure out how to type this:
-// LoadedVsLoading.story {
-//   name: 'Loaded vs. Loading'
-// }
+LoadedVsLoading.story = {
+  name: "Loaded vs. Loading",
+};
 
 export default {
   title: "Text",
   component: LoadedVsLoading,
 };
-
-// export const Emoji = () => (
-//   <Button>
-//     <span role="img" aria-label="so cool">
-//       😀 😎 👍 💯
-//     </span>
-//   </Button>
-// );
