@@ -35,3 +35,8 @@ Check for [TypeScript](https://www.typescriptlang.org/) errors as you edit files
 ```
 yarn tsc -w
 ```
+
+## Alternatives
+
+- [react-native-skeleton-content](https://github.com/alexZajac/react-native-skeleton-content) is a React Native libary that adapts to layouts in a similar manner
+- [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) adapts to web layouts but is limited in what it can do
