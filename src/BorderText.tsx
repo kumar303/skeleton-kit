@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import OpacityPulse from "./OpacityPulse";
+import { ChildrenType } from "./utils/typeUtils";
 
 const Shell = styled.span`
   display: block;
@@ -15,7 +16,7 @@ const BorderSkeleton = styled(OpacityPulse)`
 `;
 
 export interface Props {
-  children: string;
+  children: ChildrenType;
   className?: string;
 }
 

@@ -12,34 +12,43 @@ import {
 } from "../src/";
 
 const GlobalStyle = createGlobalStyle`
+  // TODO: Move this, probably.
   html {
     font-size: 16px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "dlig", "hlig";
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 `;
 
 const Grid = styled.div<{ pLineHeight: string }>`
-  // TODO: Move this, probably.
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  -moz-font-feature-settings: "kern=1", "liga=1", "dlig=1", "hlig=1";
-  -moz-font-feature-settings: "kern" on, "liga" on, "dlig" on, "hlig" on;
-  -webkit-font-feature-settings: "kern", "liga", "dlig", "hlig";
-  -ms-font-feature-settings: "kern", "liga", "dlig", "hlig";
-  font-feature-settings: "kern", "liga", "dlig", "hlig";
-
   * {
-    box-sizing: border-box;
     color: #3c3c3c;
   }
 
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
   margin: 1rem;
+  width: auto;
+
+  @media (min-width: 1100px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+  }
 
   h1,
   h2,
@@ -53,7 +62,9 @@ const Grid = styled.div<{ pLineHeight: string }>`
   }
 
   h1 {
-    font-size: 4rem;
+    display: flex;
+    font-size: 3rem;
+    justify-content: center;
     line-height: 1.4;
     margin: 0 0 1.5rem;
   }
@@ -70,8 +81,35 @@ const Grid = styled.div<{ pLineHeight: string }>`
 `;
 
 const TextStrategy = styled.h2`
+  && {
+    border: none;
+    display: flex;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    width: auto;
+    justify-content: center;
+  }
+`;
+
+const StrategyPill = styled.span`
+  align-items: center;
+  background-color: #ff4785;
+  border-radius: 0.5rem;
   display: flex;
-  justify-content: space-between;
+  padding: 1rem;
+
+  & :first-child {
+    margin-right: 2rem;
+  }
+`;
+
+const PillPhrase = styled(Phrase)`
+  color: #fff;
+`;
+
+const StrategyHeader = styled(PillPhrase)`
+  font-weight: bold;
 `;
 
 const textImpl = {
@@ -79,6 +117,19 @@ const textImpl = {
   simulated: SimulatedText,
   "border-hack": BorderText,
 };
+
+function renderStrategy(name: string) {
+  return (
+    <TextStrategy>
+      <StrategyPill>
+        <SkeletonGroup color="rgb(255, 255, 255, 0.5)">
+          <StrategyHeader>Text strategy</StrategyHeader>
+          <PillPhrase>{name}</PillPhrase>
+        </SkeletonGroup>
+      </StrategyPill>
+    </TextStrategy>
+  );
+}
 
 function renderExample({ asSkeleton = false } = {}) {
   const Text =
@@ -97,23 +148,21 @@ function renderExample({ asSkeleton = false } = {}) {
       <h1>
         <Phrase>Loaded vs. Loading</Phrase>
       </h1>
-      <TextStrategy>
-        <Phrase>Text strategy</Phrase>
-        <Phrase>realistic</Phrase>
-      </TextStrategy>
+      {renderStrategy("realistic")}
       <p>
         <Text>
           Notice how the skeletons on the right mirror the layout. They preserve
-          line-height, padding, and block height. This technique has some
-          limitations, though. For example, you can adjust the line-height to
-          see how the paragraph skeletons squish together as you approach
-          numbers like 1.1.
+          line-height, padding, and block height.
         </Text>
       </p>
-      <TextStrategy>
-        <Phrase>Text strategy</Phrase>
-        <Phrase>simulated</Phrase>
-      </TextStrategy>
+      <p>
+        <Text>
+          The <em>realistic</em> strategy has some limitations, though. For
+          example, you can adjust the line-height to see how the paragraph
+          skeletons squish together as you approach numbers like 1.1.
+        </Text>
+      </p>
+      {renderStrategy("simulated")}
       <p>
         <Text>
           Try switching to a simulated text strategy and a line-height of 1.1.
@@ -121,10 +170,7 @@ function renderExample({ asSkeleton = false } = {}) {
           doesn't perfectly mirror the block height.
         </Text>
       </p>
-      <TextStrategy>
-        <Phrase>Text strategy</Phrase>
-        <Phrase>border-hack</Phrase>
-      </TextStrategy>
+      {renderStrategy("border-hack")}
       <p>
         <Text>
           This uses a border-top to render skeleton lines. It handles tight
@@ -141,8 +187,8 @@ function App() {
     <SkeletonGroup
       borderRadius={radios(
         "borderRadius",
-        { none: "none", "0.4rem": "0.4rem" },
-        "none"
+        { "0.2rem": "0.2rem", "0.4rem": "0.4rem", none: "none" },
+        "0.2rem"
       )}
       color="#c0e4fc"
     >

@@ -1,8 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 
+import { ChildrenType } from "./utils/typeUtils";
+
 interface Props {
-  children: string;
+  children: ChildrenType;
   className?: string;
 }
 

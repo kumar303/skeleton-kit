@@ -3,9 +3,10 @@ import React from "react";
 import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
+import { ChildrenType } from "./utils/typeUtils";
 
 interface Props {
-  children: string;
+  children: ChildrenType;
   className?: string;
 }
 

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
+import { ChildrenType } from "./utils/typeUtils";
 
 const RefSpan = styled.span`
   box-sizing: border-box;
@@ -12,7 +13,7 @@ const RefSpan = styled.span`
 `;
 
 interface StyleProps {
-  children?: React.ReactNode;
+  children?: ChildrenType;
   className?: string;
   pixelHeight?: number;
   pixelWidth?: number;
