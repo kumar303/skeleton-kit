@@ -1,14 +1,16 @@
 # skeleton-kit
 
-This is a toolkit for creating near pixel-perfect skeleton screens.
+This is a React toolkit for creating low maintenance, pixel-perfect skeleton screens.
 
-## Features
+The skeleton screen technique lets you render a page before its data has loaded. Unlike spinners, they feel fast and let you defer only what's necessary.
 
-This is very much a work in progress. Here is the envisioned feature set:
+## Goals
 
-- [ ] React skeleton text
-- [ ] React Native skeleton text
-- [x] Modern code base: TypeScript, React hooks
+- Automatically adapt skeletons to real screens
+- Fit into pixel perfect design systems
+- No breakage, no maintenance burden, always in sync
+- Make it easy to work with lists of unknown lengths
+- Modern code base: TypeScript, React hooks
 
 ## Development
 
@@ -38,5 +40,8 @@ yarn tsc -w
 
 ## Alternatives
 
+Most alternative skeleton libraries require the developer to build and maintain a separate skeleton screen that can easily get out of sync with the real screen.
+However, here are a few libraries that share the same goals as `skeleton-kit`:
+
 - [react-native-skeleton-content](https://github.com/alexZajac/react-native-skeleton-content) is a React Native libary that adapts to layouts in a similar manner
-- [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) adapts to web layouts but is limited in what it can do
+- [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) automatically adapts to web layouts but is limited in what it can do
