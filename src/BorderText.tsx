@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import OpacityPulse from "./OpacityPulse";
 import { ChildrenType } from "./utils/typeUtils";
+import AsSkeleton from "./utils/AsSkeleton";
 
 const Shell = styled.span`
   display: block;
@@ -21,15 +21,19 @@ export interface Props {
 }
 
 export default function BorderText({ children, className }: Props) {
-  const theme = useTheme();
-  if (!theme.showSkeletons) {
-    return <span className={className}>{children}</span>;
-  }
   return (
-    <Shell className={className}>
-      <BorderSkeleton>
-        <InvisibleText>{children}</InvisibleText>
-      </BorderSkeleton>
-    </Shell>
+    <AsSkeleton
+      className={className}
+      normalContent={children}
+      renderSkeleton={() => {
+        return (
+          <Shell className={className}>
+            <BorderSkeleton>
+              <InvisibleText>{children}</InvisibleText>
+            </BorderSkeleton>
+          </Shell>
+        );
+      }}
+    />
   );
 }

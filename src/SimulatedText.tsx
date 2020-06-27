@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { useTheme } from "./theme";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
 import { ChildrenType } from "./utils/typeUtils";
+import AsSkeleton from "./utils/AsSkeleton";
 
 const RefSpan = styled.span`
   box-sizing: border-box;
@@ -14,7 +14,7 @@ const RefSpan = styled.span`
 
 interface StyleProps {
   children?: ChildrenType;
-  className?: string;
+  className: string | undefined;
   pixelHeight?: number;
   pixelWidth?: number;
 }
@@ -42,17 +42,12 @@ const SkeletonLine = styled(Skeleton)`
   width: 100%;
 `;
 
-interface Props {
-  children: string;
+export interface Props {
+  children: ChildrenType;
   className?: string;
 }
 
 export default function SimulatedText({ children, className }: Props) {
-  const theme = useTheme();
-  if (!theme.showSkeletons) {
-    return <>{children}</>;
-  }
-
   const [lineHeight, setLineHeight] = useState<null | number>(null);
   const [boxHeight, setBoxHeight] = useState<null | number>(null);
   const [boxWidth, setBoxWidth] = useState<null | number>(null);
@@ -73,28 +68,36 @@ export default function SimulatedText({ children, className }: Props) {
     }
   }, [shell]);
 
-  if (boxWidth && boxHeight && lineHeight) {
-    // TODO: check rounding
-    return (
-      <RecreatedSpan
-        className={className}
-        pixelHeight={boxHeight}
-        pixelWidth={boxWidth}
-      >
-        {new Array(Math.round(boxHeight / lineHeight))
-          .fill(1)
-          .map((item, idx) => (
-            <Line key={`${boxHeight}-${boxWidth}-${idx}`}>
-              <SkeletonLine />
-            </Line>
-          ))}
-      </RecreatedSpan>
-    );
-  }
-
   return (
-    <RefSpan className={className} ref={shell}>
-      <InvisibleText>{children}</InvisibleText>
-    </RefSpan>
+    <AsSkeleton
+      className={className}
+      normalContent={children}
+      renderSkeleton={() => {
+        if (boxWidth && boxHeight && lineHeight) {
+          console.log("RecreatedSpan");
+          return (
+            <RecreatedSpan
+              className={className}
+              pixelHeight={boxHeight}
+              pixelWidth={boxWidth}
+            >
+              {new Array(Math.round(boxHeight / lineHeight))
+                .fill(1)
+                .map((item, idx) => (
+                  <Line key={`${boxHeight}-${boxWidth}-${idx}`}>
+                    <SkeletonLine />
+                  </Line>
+                ))}
+            </RecreatedSpan>
+          );
+        }
+
+        return (
+          <RefSpan className={className} ref={shell}>
+            <InvisibleText>{children}</InvisibleText>
+          </RefSpan>
+        );
+      }}
+    />
   );
 }

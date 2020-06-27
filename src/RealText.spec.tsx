@@ -1,23 +1,23 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { InvisibleText, Phrase, SkeletonGroup } from ".";
+import { InvisibleText, RealText, SkeletonGroup } from ".";
 import { SkeletonTheme } from "./theme";
-import { Props as PhraseProps } from "./Phrase";
+import { Props as RealTextProps } from "./RealText";
 
 describe(__filename, () => {
   function render({
     children = "Example text",
     showSkeletons = true,
     ...moreProps
-  }: SkeletonTheme & Partial<PhraseProps> = {}) {
+  }: SkeletonTheme & Partial<RealTextProps> = {}) {
     const props = { children, showSkeletons, ...moreProps };
     const root = mount(
       <SkeletonGroup {...props}>
-        <Phrase {...props} />
+        <RealText {...props} />
       </SkeletonGroup>
     );
-    return root.find(Phrase);
+    return root.find(RealText);
   }
 
   it("renders invisible text when showing skeletons", () => {

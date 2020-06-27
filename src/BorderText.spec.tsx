@@ -1,16 +1,17 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { BorderText, SkeletonGroup } from ".";
+import { BorderText, InvisibleText, SkeletonGroup } from ".";
 import { SkeletonTheme } from "./theme";
 import { Props as BorderTextProps } from "./BorderText";
 
 describe(__filename, () => {
   function render({
     children = "Example text",
+    showSkeletons = true,
     ...moreProps
   }: SkeletonTheme & Partial<BorderTextProps> = {}) {
-    const props = { children, ...moreProps };
+    const props = { children, showSkeletons, ...moreProps };
     const root = mount(
       <SkeletonGroup {...props}>
         <BorderText {...props} />
@@ -19,16 +20,17 @@ describe(__filename, () => {
     return root.find(BorderText);
   }
 
-  it("adds a className when showing skeletons", () => {
-    const className = "MyCoolClass";
-    const root = render({ showSkeletons: true, className });
+  it("renders invisible text when showing skeletons", () => {
+    const children = "Some text";
+    const root = render({ children });
 
-    expect(root.childAt(0)).toHaveClassName(className);
+    expect(root.text()).toEqual(children);
+    expect(root.find(InvisibleText)).toHaveLength(1);
   });
 
-  it("adds a className when not showing skeletons", () => {
+  it("adds className when showing skeletons", () => {
     const className = "MyCoolClass";
-    const root = render({ showSkeletons: false, className });
+    const root = render({ className });
 
     expect(root.childAt(0)).toHaveClassName(className);
   });

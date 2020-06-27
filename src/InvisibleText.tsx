@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { ChildrenType } from "./utils/typeUtils";
 
-interface Props {
+export interface Props {
   children: ChildrenType;
   className?: string;
 }

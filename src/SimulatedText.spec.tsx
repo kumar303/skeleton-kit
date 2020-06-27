@@ -1,37 +1,37 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { InvisibleText, Phrase, SkeletonGroup } from ".";
+import { InvisibleText, SkeletonGroup, SimulatedText } from ".";
 import { SkeletonTheme } from "./theme";
-import { Props as PhraseProps } from "./Phrase";
+import { Props as SimulatedTextProps } from "./SimulatedText";
 
 describe(__filename, () => {
   function render({
     children = "Example text",
     showSkeletons = true,
     ...moreProps
-  }: SkeletonTheme & Partial<PhraseProps> = {}) {
+  }: SkeletonTheme & Partial<SimulatedTextProps> = {}) {
     const props = { children, showSkeletons, ...moreProps };
     const root = mount(
       <SkeletonGroup {...props}>
-        <Phrase {...props} />
+        <SimulatedText {...props} />
       </SkeletonGroup>
     );
-    return root.find(Phrase);
+    return root.find(SimulatedText);
   }
 
-  it("renders invisible text when showing skeletons", () => {
+  it("adds a className when showing skeletons", () => {
+    const className = "MyCoolClass";
+    const root = render({ className });
+
+    expect(root.childAt(0)).toHaveClassName(className);
+  });
+
+  it("renders children when showing skeletons", () => {
     const children = "Some text";
     const root = render({ children });
 
     expect(root.text()).toEqual(children);
     expect(root.find(InvisibleText)).toHaveLength(1);
-  });
-
-  it("adds className when showing skeletons", () => {
-    const className = "MyCoolClass";
-    const root = render({ className });
-
-    expect(root.childAt(0)).toHaveClassName(className);
   });
 });
