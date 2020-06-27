@@ -4,11 +4,11 @@ import { Reset } from "styled-reset";
 import { radios, text, boolean, number } from "@storybook/addon-knobs";
 
 import {
-  Phrase,
-  SkeletonGroup,
-  RealText,
-  SimulatedText,
   BorderText,
+  Phrase,
+  RealText,
+  SkeletonGroup,
+  SimulatedText,
 } from "../src/";
 
 const GlobalStyle = createGlobalStyle`

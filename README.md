@@ -10,7 +10,7 @@ The skeleton screen technique lets you render a page before its data has loaded.
 - Fit into pixel perfect design systems
 - No breakage, no maintenance burden, always in sync
 - Make it easy to work with lists of unknown lengths
-- Modern code base: TypeScript, React hooks
+- Built to last: TypeScript, React hooks, accessibility, tests
 
 ## Development
 

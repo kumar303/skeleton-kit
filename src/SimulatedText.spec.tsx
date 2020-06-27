@@ -1,7 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { InvisibleText, SkeletonGroup, SimulatedText } from ".";
+import { SkeletonGroup, SimulatedText } from ".";
+import InvisibleText from "./InvisibleText";
 import { SkeletonTheme } from "./theme";
 import { Props as SimulatedTextProps } from "./SimulatedText";
 
@@ -31,7 +32,7 @@ describe(__filename, () => {
     const children = "Some text";
     const root = render({ children });
 
-    expect(root.text()).toEqual(children);
+    expect(root.text()).toContain(children);
     expect(root.find(InvisibleText)).toHaveLength(1);
   });
 });

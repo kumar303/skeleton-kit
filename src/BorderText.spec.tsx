@@ -1,7 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { BorderText, InvisibleText, SkeletonGroup } from ".";
+import { BorderText, SkeletonGroup } from ".";
+import InvisibleText from "./InvisibleText";
 import { SkeletonTheme } from "./theme";
 import { Props as BorderTextProps } from "./BorderText";
 
@@ -24,7 +25,7 @@ describe(__filename, () => {
     const children = "Some text";
     const root = render({ children });
 
-    expect(root.text()).toEqual(children);
+    expect(root.text()).toContain(children);
     expect(root.find(InvisibleText)).toHaveLength(1);
   });
 
