@@ -1,7 +1,8 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import { Reset } from "styled-reset";
-import { radios, text, boolean, number } from "@storybook/addon-knobs";
+import styled from "styled-components";
+import { radios, text } from "@storybook/addon-knobs";
+
+import { Story, colors } from "./helpers/styles";
 
 import {
   BorderText,
@@ -11,37 +12,10 @@ import {
   SimulatedText,
 } from "../src/";
 
-const GlobalStyle = createGlobalStyle`
-  // TODO: Move this, probably.
-  html {
-    font-size: 16px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "kern", "liga", "dlig", "hlig";
-  }
-
-  em {
-    font-style: italic;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-`;
-
 const Grid = styled.div<{ pLineHeight: string }>`
-  * {
-    color: #3c3c3c;
-  }
-
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  margin: 1rem;
   width: auto;
 
   @media (min-width: 1100px) {
@@ -56,7 +30,7 @@ const Grid = styled.div<{ pLineHeight: string }>`
   h4,
   h5,
   p {
-    border: 0.09rem dotted #fb9fc1;
+    border: 0.09rem dotted ${colors.lightPink};
     margin-bottom: 1rem;
     padding: 1rem;
   }
@@ -94,7 +68,7 @@ const TextStrategy = styled.h2`
 
 const StrategyPill = styled.span`
   align-items: center;
-  background-color: #ff4785;
+  background-color: ${colors.darkPink};
   border-radius: 0.5rem;
   display: flex;
   padding: 1rem;
@@ -105,7 +79,7 @@ const StrategyPill = styled.span`
 `;
 
 const PillPhrase = styled(Phrase)`
-  color: #fff;
+  color: ${colors.white};
 `;
 
 const StrategyHeader = styled(PillPhrase)`
@@ -182,33 +156,28 @@ function renderExample({ asSkeleton = false } = {}) {
   );
 }
 
-function App() {
+function LoadedVsLoading() {
   return (
-    <SkeletonGroup
-      borderRadius={radios(
-        "borderRadius",
-        { "0.2rem": "0.2rem", "0.4rem": "0.4rem", none: "none" },
-        "0.2rem"
-      )}
-      color="#c0e4fc"
-    >
-      <Reset />
-      <GlobalStyle />
-      <Grid pLineHeight={text("Paragraph line-height", "1.4")}>
-        <div>{renderExample()}</div>
-        <div>{renderExample({ asSkeleton: true })}</div>
-      </Grid>
-    </SkeletonGroup>
+    <Story>
+      <SkeletonGroup
+        borderRadius={radios(
+          "borderRadius",
+          { "0.2rem": "0.2rem", "0.4rem": "0.4rem", none: "none" },
+          "0.2rem"
+        )}
+        color={colors.lightBlue}
+      >
+        <Grid pLineHeight={text("Paragraph line-height", "1.4")}>
+          <div>{renderExample()}</div>
+          <div>{renderExample({ asSkeleton: true })}</div>
+        </Grid>
+      </SkeletonGroup>
+    </Story>
   );
 }
-
-export const LoadedVsLoading = () => <App />;
 
 LoadedVsLoading.story = {
   name: "Loaded vs. Loading",
 };
 
-export default {
-  title: "Text",
-  component: LoadedVsLoading,
-};
+export default LoadedVsLoading;
