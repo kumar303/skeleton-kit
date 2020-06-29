@@ -9,6 +9,8 @@ interface Props extends SkeletonTheme {
 }
 
 export default function SkeletonGroup({ children, ...theme }: Props) {
+  // TODO: should skeleton theme props be namespaced so they don't
+  // collide with user defined themes within styled-components?
   const themeContext = useContext(ThemeContext);
   const appliedTheme = getAppliedTheme({ ...themeContext, ...theme });
 
