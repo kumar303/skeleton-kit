@@ -15,6 +15,7 @@ export function getAppliedTheme(theme: SkeletonTheme) {
     altText: theme.altText ?? "Loading…",
     borderRadius: theme.borderRadius ?? "none",
     // TODO: maybe pick a better default.
+    // TODO: consider detecting inherited color
     color: theme.color ?? "rgb(129, 129, 129, 1)",
     showSkeletons: theme.showSkeletons ?? false,
   };
