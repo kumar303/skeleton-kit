@@ -2,23 +2,23 @@ import styled, { keyframes } from "styled-components";
 
 const pulseOpacity = keyframes`
   0% {
-    opacity: 0.5;
+    opacity: 0.2;
   }
 
   25% {
-    opacity: 0.25;
+    opacity: 0.1;
   }
 
   50% {
-    opacity: 0.75;
-  }
-
-  75% {
     opacity: 0.25;
   }
 
+  75% {
+    opacity: 0.1;
+  }
+
   100% {
-    opacity: 0.5;
+    opacity: 0.2;
   }
 `;
 

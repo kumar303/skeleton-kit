@@ -96,7 +96,7 @@ function renderStrategy(name: string) {
   return (
     <TextStrategy>
       <StrategyPill>
-        <SkeletonGroup color="rgb(255, 255, 255, 0.5)">
+        <SkeletonGroup color={colors.white}>
           <StrategyHeader>Text strategy</StrategyHeader>
           <PillPhrase>{name}</PillPhrase>
         </SkeletonGroup>
@@ -165,7 +165,7 @@ function LoadedVsLoading() {
           { "0.2rem": "0.2rem", "0.4rem": "0.4rem", none: "none" },
           "0.2rem"
         )}
-        color={colors.lightBlue}
+        color={colors.black}
       >
         <Grid pLineHeight={text("Paragraph line-height", "1.4")}>
           <div>{renderExample()}</div>
