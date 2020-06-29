@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { radios } from "@storybook/addon-knobs";
+import { boolean, radios } from "@storybook/addon-knobs";
 
 import { Phrase, RealText as Text, SkeletonGroup } from "../src/";
 import { Story, colors } from "./helpers/styles";
 
-const HeaderButton = styled.button`
+const Button = styled.button`
   width: 100%;
 `;
 
@@ -28,17 +28,24 @@ const NavItem = styled.li`
   }
 `;
 
+const NavArrow = styled.span<{ selected: boolean }>`
+  display: flex;
+  justify-content: flex-end;
+  opacity: ${(props) => (props.selected ? "1.0" : "0")};
+  transition: opacity 0.3s linear;
+  width: 100%;
+`;
+
 const NavLink = styled.a`
+  align-items: center;
   color: ${colors.darkBlue};
   display: flex;
-  font-size: 1.4rem;
   text-decoration: none;
   white-space: nowrap;
   width: 100%;
 `;
 
 const Content = styled.section`
-  font-size: 2rem;
   grid-area: L_content;
   padding: 0;
 `;
@@ -60,8 +67,11 @@ const Grid = styled.div`
     width: 900px;
   }
 
-  ${NavLink}, ${Content} {
-    line-height: 1.5;
+  ${Button},
+  ${NavLink},
+  ${Content} {
+    font-size: 1.6rem;
+    line-height: 1.6;
   }
 `;
 
@@ -72,6 +82,18 @@ const Header = styled.header`
   & :not(:last-child) {
     margin-right: 2rem;
   }
+`;
+
+const Title = styled.h2`
+  border: 1px solid ${colors.darkPink};
+  border-left: none;
+  border-right: none;
+  color: ${colors.darkPink};
+  font-size: 3.5rem;
+  font-weight: bold;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
 `;
 
 const data = [
@@ -106,15 +128,15 @@ const data = [
         harvesters, blues, and metal marks. Most prefer tropical habitats;
         however, 145 species can be found in the United States.
     `,
+  },
+  // Third set:
+  {
     "Giant skippers": `
         This North American family of skipper butterflies is known for being
         strong-flying. They are typically considered a subfamily of
         Hesperiidae.
     `,
-  },
-  // Third set:
-  {
-    "Brush-footed butterflies": `
+    "Brush-footed": `
         This butterfly family has around 6,000 species divided into 12
         subfamilies and 40 tribes and found throughout the world in most
         habitats.
@@ -133,8 +155,14 @@ const data = [
 
 export default function LoadingTransitions() {
   const loadSpeed = parseFloat(
-    radios("Loading speed (seconds)", { "0.5": "0.5", "3": "3", "5": "5" }, "5")
+    radios(
+      "Loading speed (seconds)",
+      { "0.1": "0.1", "0.5": "0.5", "3": "3", "5": "5" },
+      "3"
+    )
   );
+
+  const forceLoading = boolean("Show loading state", false);
 
   const initialDataIndex = -1;
 
@@ -177,19 +205,19 @@ export default function LoadingTransitions() {
     dataIndex >= 0 ? data[dataIndex] : {};
   const content = info ? info[contentKey] : undefined;
 
+  const showSkeletons = forceLoading || isLoading;
+
   return (
     <Story>
       <SkeletonGroup
         borderRadius="0.4rem"
-        color={colors.lightBlue}
-        showSkeletons={isLoading}
+        color={colors.darkBlue}
+        showSkeletons={showSkeletons}
       >
         <Grid>
           <Header>
-            <HeaderButton onClick={seeInitial}>
-              See Initial Loading State
-            </HeaderButton>
-            <HeaderButton onClick={loadNextSet}>Load Next Set</HeaderButton>
+            <Button onClick={seeInitial}>See Initial Loading State</Button>
+            <Button onClick={loadNextSet}>Load Next Set</Button>
           </Header>
           <Nav>
             <NavList>
@@ -198,13 +226,20 @@ export default function LoadingTransitions() {
                   <NavItem key={key}>
                     <NavLink
                       onClick={(event) => {
-                        loadContentKey(key);
                         event.preventDefault();
                         event.stopPropagation();
+                        if (showSkeletons) {
+                          // Disable while loading.
+                          return;
+                        }
+                        loadContentKey(key);
                       }}
                       href="#"
                     >
                       <Phrase>{key}</Phrase>
+                      <NavArrow selected={contentKey === key && !showSkeletons}>
+                        &raquo;
+                      </NavArrow>
                     </NavLink>
                   </NavItem>
                 );
@@ -212,8 +247,17 @@ export default function LoadingTransitions() {
             </NavList>
           </Nav>
           <Content>
-            <SkeletonGroup showSkeletons={isLoading || isLoadingContent}>
-              <Text>{content}</Text>
+            <SkeletonGroup showSkeletons={showSkeletons || isLoadingContent}>
+              <Title>
+                <SkeletonGroup color={colors.darkPink}>
+                  <Phrase>{contentKey}</Phrase>
+                </SkeletonGroup>
+              </Title>
+              <p>
+                <SkeletonGroup color={colors.black}>
+                  <Text>{content}</Text>
+                </SkeletonGroup>
+              </p>
             </SkeletonGroup>
           </Content>
         </Grid>
