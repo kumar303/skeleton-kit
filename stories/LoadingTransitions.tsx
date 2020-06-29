@@ -169,11 +169,12 @@ export default function LoadingTransitions() {
   const forceLoading = boolean("Show loading state", false);
 
   const initialDataIndex = -1;
+  const initialContentKey = "";
 
   const [isLoading, setLoadingState] = useState<boolean>(false);
   const [isLoadingContent, setLoadingContentState] = useState<boolean>(false);
   const [dataIndex, setDataIndex] = useState<number>(initialDataIndex);
-  const [contentKey, setContentKey] = useState<string>("");
+  const [contentKey, setContentKey] = useState<string>(initialContentKey);
 
   const loadNextSet = () => {
     setLoadingState(true);
@@ -202,6 +203,7 @@ export default function LoadingTransitions() {
 
   const seeInitial = () => {
     setDataIndex(initialDataIndex);
+    setContentKey(initialContentKey);
     loadNextSet();
   };
 
