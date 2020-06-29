@@ -31,7 +31,7 @@ const NavItem = styled.li`
 const NavArrow = styled.span<{ selected: boolean }>`
   display: flex;
   justify-content: flex-end;
-  opacity: ${(props) => (props.selected ? "1.0" : "0")};
+  opacity: ${(props) => (props.selected ? "1" : "0")};
   transition: opacity 0.3s linear;
   width: 100%;
 `;
@@ -43,6 +43,10 @@ const NavLink = styled.a`
   text-decoration: none;
   white-space: nowrap;
   width: 100%;
+
+  &:hover ${NavArrow} {
+    opacity: 0.5;
+  }
 `;
 
 const Content = styled.section`
