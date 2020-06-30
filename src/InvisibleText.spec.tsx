@@ -3,7 +3,10 @@ import { mount } from "enzyme";
 
 import { SkeletonGroup } from ".";
 import { SkeletonTheme } from "./theme";
-import InvisibleText, { Props as InvisibleTextProps } from "./InvisibleText";
+import InvisibleText, {
+  AltText,
+  Props as InvisibleTextProps,
+} from "./InvisibleText";
 
 describe(__filename, () => {
   function render({
@@ -23,5 +26,12 @@ describe(__filename, () => {
     const root = render({ children });
 
     expect(root.text()).toContain(children);
+  });
+
+  it("renders alt text", () => {
+    const altText = "The content is still loading…";
+    const root = render({ altText });
+
+    expect(root.find(AltText)).toHaveText(altText);
   });
 });
