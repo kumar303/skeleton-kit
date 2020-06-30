@@ -1,9 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { SkeletonGroup, SimulatedText } from ".";
+import { SimulatedText } from ".";
 import InvisibleText from "./InvisibleText";
-import { SkeletonTheme } from "./theme";
 import { Props as SimulatedTextProps } from "./SimulatedText";
 
 describe(__filename, () => {
@@ -11,13 +10,9 @@ describe(__filename, () => {
     children = "Example text",
     showSkeletons = true,
     ...moreProps
-  }: SkeletonTheme & Partial<SimulatedTextProps> = {}) {
+  }: Partial<SimulatedTextProps> = {}) {
     const props = { children, showSkeletons, ...moreProps };
-    const root = mount(
-      <SkeletonGroup {...props}>
-        <SimulatedText {...props} />
-      </SkeletonGroup>
-    );
+    const root = mount(<SimulatedText {...props} />);
     return root.find(SimulatedText);
   }
 

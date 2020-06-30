@@ -1,9 +1,8 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { BorderText, SkeletonGroup } from ".";
+import { BorderText } from ".";
 import InvisibleText from "./InvisibleText";
-import { SkeletonTheme } from "./theme";
 import { Props as BorderTextProps } from "./BorderText";
 
 describe(__filename, () => {
@@ -11,13 +10,9 @@ describe(__filename, () => {
     children = "Example text",
     showSkeletons = true,
     ...moreProps
-  }: SkeletonTheme & Partial<BorderTextProps> = {}) {
+  }: Partial<BorderTextProps> = {}) {
     const props = { children, showSkeletons, ...moreProps };
-    const root = mount(
-      <SkeletonGroup {...props}>
-        <BorderText {...props} />
-      </SkeletonGroup>
-    );
+    const root = mount(<BorderText {...props} />);
     return root.find(BorderText);
   }
 
