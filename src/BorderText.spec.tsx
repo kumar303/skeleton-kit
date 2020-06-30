@@ -33,6 +33,6 @@ describe(__filename, () => {
     const className = "MyCoolClass";
     const root = render({ className });
 
-    expect(root.childAt(0)).toHaveClassName(className);
+    expect(root.find("span").find(`.${className}`)).toHaveLength(1);
   });
 });

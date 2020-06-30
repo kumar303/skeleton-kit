@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
+import MaybeSkeletonGroup, {
+  Props as MaybeSkeletonGroupProps,
+} from "./MaybeSkeletonGroup";
 import { ChildrenType } from "./utils/typeUtils";
 import AsSkeleton from "./utils/AsSkeleton";
 
@@ -42,12 +45,16 @@ const SkeletonLine = styled(Skeleton)`
   width: 100%;
 `;
 
-export interface Props {
+export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
   className?: string;
 }
 
-export default function SimulatedText({ children, className }: Props) {
+export default function SimulatedText({
+  children,
+  className,
+  ...groupProps
+}: Props) {
   const [lineHeight, setLineHeight] = useState<null | number>(null);
   const [boxHeight, setBoxHeight] = useState<null | number>(null);
   const [boxWidth, setBoxWidth] = useState<null | number>(null);
@@ -69,35 +76,37 @@ export default function SimulatedText({ children, className }: Props) {
   }, [shell]);
 
   return (
-    <AsSkeleton
-      className={className}
-      normalContent={children}
-      renderSkeleton={() => {
-        if (boxWidth && boxHeight && lineHeight) {
-          console.log("RecreatedSpan");
-          return (
-            <RecreatedSpan
-              className={className}
-              pixelHeight={boxHeight}
-              pixelWidth={boxWidth}
-            >
-              {new Array(Math.round(boxHeight / lineHeight))
-                .fill(1)
-                .map((item, idx) => (
-                  <Line key={`${boxHeight}-${boxWidth}-${idx}`}>
-                    <SkeletonLine />
-                  </Line>
-                ))}
-            </RecreatedSpan>
-          );
-        }
+    <MaybeSkeletonGroup {...groupProps}>
+      <AsSkeleton
+        className={className}
+        normalContent={children}
+        renderSkeleton={() => {
+          if (boxWidth && boxHeight && lineHeight) {
+            console.log("RecreatedSpan");
+            return (
+              <RecreatedSpan
+                className={className}
+                pixelHeight={boxHeight}
+                pixelWidth={boxWidth}
+              >
+                {new Array(Math.round(boxHeight / lineHeight))
+                  .fill(1)
+                  .map((item, idx) => (
+                    <Line key={`${boxHeight}-${boxWidth}-${idx}`}>
+                      <SkeletonLine />
+                    </Line>
+                  ))}
+              </RecreatedSpan>
+            );
+          }
 
-        return (
-          <RefSpan className={className} ref={shell}>
-            <InvisibleText>{children}</InvisibleText>
-          </RefSpan>
-        );
-      }}
-    />
+          return (
+            <RefSpan className={className} ref={shell}>
+              <InvisibleText>{children}</InvisibleText>
+            </RefSpan>
+          );
+        }}
+      />
+    </MaybeSkeletonGroup>
   );
 }

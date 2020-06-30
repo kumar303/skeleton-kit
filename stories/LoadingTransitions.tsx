@@ -255,14 +255,10 @@ export default function LoadingTransitions() {
           <Content>
             <SkeletonGroup showSkeletons={showSkeletons || isLoadingContent}>
               <Title>
-                <SkeletonGroup color={colors.darkPink}>
-                  <Phrase>{contentKey}</Phrase>
-                </SkeletonGroup>
+                <Phrase color={colors.darkPink}>{contentKey}</Phrase>
               </Title>
               <p>
-                <SkeletonGroup color={colors.black}>
-                  <Text>{content}</Text>
-                </SkeletonGroup>
+                <Text color={colors.black}>{content}</Text>
               </p>
             </SkeletonGroup>
           </Content>

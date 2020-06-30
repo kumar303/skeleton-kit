@@ -16,7 +16,7 @@ export const AltText = styled.span`
   width: 1px;
 `;
 
-interface Props extends SkeletonTheme {
+export interface Props extends SkeletonTheme {
   children: ChildrenType;
 }
 
