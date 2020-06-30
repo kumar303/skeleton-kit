@@ -2,6 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 
 import { SkeletonGroup } from ".";
+import { AltText } from "./SkeletonGroup";
 import { SkeletonTheme, useTheme } from "./theme";
 
 function ThemeCatcher(props: { theme: SkeletonTheme }) {
@@ -63,5 +64,27 @@ describe(__filename, () => {
     );
 
     expect(theme.color).toEqual(color);
+  });
+
+  it("renders alt text while showing skeletons", () => {
+    const altText = "The content is still loading…";
+    const root = mount(
+      <SkeletonGroup showSkeletons altText={altText}>
+        <span />
+      </SkeletonGroup>
+    );
+
+    expect(root.find(AltText)).toHaveText(altText);
+  });
+
+  it("does not render alt text when not showing skeletons", () => {
+    const altText = "The content is still loading…";
+    const root = mount(
+      <SkeletonGroup showSkeletons={false} altText={altText}>
+        <span />
+      </SkeletonGroup>
+    );
+
+    expect(root.find(AltText)).toHaveLength(0);
   });
 });
