@@ -33,11 +33,11 @@ const BorderText: React.FunctionComponent<Props> = ({
       <MaybeSkeleton
         className={className}
         normalContent={children}
-        renderSkeleton={() => {
+        renderSkeleton={(content) => {
           return (
             <Shell className={className}>
               <BorderSkeleton>
-                <InvisibleText>{children}</InvisibleText>
+                <InvisibleText>{content}</InvisibleText>
               </BorderSkeleton>
             </Shell>
           );

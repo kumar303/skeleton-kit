@@ -40,9 +40,10 @@ describe(__filename, () => {
   it("handles showing skeletons", () => {
     const innerClassName = "CustomClass";
     const renderSkeleton = jest.fn(() => <span className={innerClassName} />);
-    const root = render({ renderSkeleton, showSkeletons: true });
+    const normalContent = "Example of some content";
+    const root = render({ normalContent, renderSkeleton, showSkeletons: true });
 
     expect(root.childAt(0)).toHaveClassName(innerClassName);
-    expect(renderSkeleton).toHaveBeenCalled();
+    expect(renderSkeleton).toHaveBeenCalledWith(normalContent);
   });
 });

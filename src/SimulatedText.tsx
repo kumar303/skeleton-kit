@@ -80,7 +80,7 @@ const SimulatedText: React.FunctionComponent<Props> = ({
       <MaybeSkeleton
         className={className}
         normalContent={children}
-        renderSkeleton={() => {
+        renderSkeleton={(content) => {
           if (boxWidth && boxHeight && lineHeight) {
             return (
               <RecreatedSpan
@@ -102,7 +102,7 @@ const SimulatedText: React.FunctionComponent<Props> = ({
 
           return (
             <RefSpan className={className} ref={shell}>
-              <InvisibleText>{children}</InvisibleText>
+              <InvisibleText>{content}</InvisibleText>
             </RefSpan>
           );
         }}

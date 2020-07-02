@@ -23,10 +23,10 @@ const Phrase: React.FunctionComponent<Props> = ({
       <MaybeSkeleton
         className={className}
         normalContent={children}
-        renderSkeleton={() => {
+        renderSkeleton={(content) => {
           return (
             <Skeleton className={className}>
-              <InvisibleText>{children}</InvisibleText>
+              <InvisibleText>{content}</InvisibleText>
             </Skeleton>
           );
         }}

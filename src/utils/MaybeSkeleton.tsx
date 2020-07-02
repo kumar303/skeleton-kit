@@ -6,7 +6,7 @@ import { ChildrenType } from "./typeUtils";
 export interface Props {
   normalContent: ChildrenType;
   className: string | undefined;
-  renderSkeleton: () => JSX.Element;
+  renderSkeleton: (content: ChildrenType) => JSX.Element;
 }
 
 const MaybeSkeleton: React.FunctionComponent<Props> = ({
@@ -19,7 +19,7 @@ const MaybeSkeleton: React.FunctionComponent<Props> = ({
     return <span className={className}>{normalContent}</span>;
   }
 
-  return renderSkeleton();
+  return renderSkeleton(normalContent);
 };
 
 export default MaybeSkeleton;
