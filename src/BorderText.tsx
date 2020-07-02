@@ -23,11 +23,11 @@ export interface Props extends MaybeSkeletonGroupProps {
   className?: string;
 }
 
-export default function BorderText({
+const BorderText: React.FunctionComponent<Props> = ({
   children,
   className,
   ...groupProps
-}: Props) {
+}) => {
   return (
     <MaybeSkeletonGroup {...groupProps}>
       <MaybeSkeleton
@@ -45,4 +45,6 @@ export default function BorderText({
       />
     </MaybeSkeletonGroup>
   );
-}
+};
+
+export default BorderText;

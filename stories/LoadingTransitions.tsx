@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { boolean, radios } from "@storybook/addon-knobs";
 
-import { Phrase, RealText as Text, SkeletonGroup } from "../src/";
+import { Phrase, RealText as Text, SkeletonGroup } from "../src";
 import { Story, colors } from "./helpers/styles";
 
 const Button = styled.button`
@@ -157,7 +157,10 @@ const data = [
   },
 ];
 
-export default function LoadingTransitions() {
+const LoadingTransitions: React.FunctionComponent<Record<
+  string,
+  unknown
+>> = () => {
   const loadSpeed = parseFloat(
     radios(
       "Loading speed (seconds)",
@@ -266,4 +269,6 @@ export default function LoadingTransitions() {
       </SkeletonGroup>
     </Story>
   );
-}
+};
+
+export default LoadingTransitions;

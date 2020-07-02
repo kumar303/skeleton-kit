@@ -15,6 +15,8 @@ export interface Props {
   className?: string;
 }
 
-export default function Skeleton({ children, className }: Props) {
+const Skeleton: React.FunctionComponent<Props> = ({ children, className }) => {
   return <StyledSpan className={className}>{children}</StyledSpan>;
-}
+};
+
+export default Skeleton;

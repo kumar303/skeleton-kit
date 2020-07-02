@@ -9,15 +9,17 @@ export interface Props {
   renderSkeleton: () => JSX.Element;
 }
 
-export default function MaybeSkeleton({
+const MaybeSkeleton: React.FunctionComponent<Props> = ({
   normalContent,
   className,
   renderSkeleton,
-}: Props) {
+}) => {
   const theme = useTheme();
   if (!theme.showSkeletons) {
     return <span className={className}>{normalContent}</span>;
   }
 
   return renderSkeleton();
-}
+};
+
+export default MaybeSkeleton;

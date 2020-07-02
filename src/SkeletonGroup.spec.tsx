@@ -4,14 +4,17 @@ import { mount } from "enzyme";
 import { SkeletonGroup } from ".";
 import { SkeletonTheme, useTheme } from "./theme";
 
-function ThemeCatcher(props: { theme: SkeletonTheme }) {
+const ThemeCatcher: React.FunctionComponent<{ theme: SkeletonTheme }> = () => {
   return <span />;
-}
+};
 
-function ExampleComponent() {
+const ExampleComponent: React.FunctionComponent<Record<
+  string,
+  unknown
+>> = () => {
   const theme = useTheme();
   return <ThemeCatcher theme={theme} />;
-}
+};
 
 describe(__filename, () => {
   function catchTheme(jsx: JSX.Element) {

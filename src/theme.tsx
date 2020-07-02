@@ -10,7 +10,7 @@ export interface SkeletonTheme {
   showSkeletons?: boolean;
 }
 
-export function getAppliedTheme(theme: SkeletonTheme) {
+export function getAppliedTheme(theme: SkeletonTheme): SkeletonTheme {
   const appliedTheme: SkeletonTheme = {
     altText: theme.altText ?? "Loading…",
     borderRadius: theme.borderRadius ?? "none",
@@ -23,7 +23,7 @@ export function getAppliedTheme(theme: SkeletonTheme) {
   return appliedTheme;
 }
 
-export function useTheme() {
+export function useTheme(): SkeletonTheme {
   const theme = useContext(ThemeContext);
   if (!theme) {
     throw new Error(

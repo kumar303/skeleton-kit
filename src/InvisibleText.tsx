@@ -24,7 +24,7 @@ export interface Props {
   children: ChildrenType;
 }
 
-export default function InvisibleText({ children }: Props) {
+const InvisibleText: React.FunctionComponent<Props> = ({ children }) => {
   const theme = useTheme();
   return (
     <>
@@ -32,4 +32,6 @@ export default function InvisibleText({ children }: Props) {
       <AltText>{theme.altText}</AltText>
     </>
   );
-}
+};
+
+export default InvisibleText;

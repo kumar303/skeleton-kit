@@ -10,7 +10,7 @@ import {
   RealText,
   SkeletonGroup,
   SimulatedText,
-} from "../src/";
+} from "../src";
 
 const Grid = styled.div<{ pLineHeight: string }>`
   display: grid;
@@ -141,14 +141,14 @@ function renderExample({ MaybeSkeleton = false } = {}) {
         <Text>
           Try switching to a simulated text strategy and a line-height of 1.1.
           This allows the skeleton line to be any height but, as you can see, it
-          doesn't perfectly mirror the block height.
+          does not perfectly mirror the block height.
         </Text>
       </p>
       {renderStrategy("border-hack")}
       <p>
         <Text>
           This uses a border-top to render skeleton lines. It handles tight
-          line-heights better but you can't use rounded corners with this
+          line-heights better but you can&lsquo;t use rounded corners with this
           implementation.
         </Text>
       </p>
@@ -156,7 +156,10 @@ function renderExample({ MaybeSkeleton = false } = {}) {
   );
 }
 
-function LoadedVsLoading() {
+const LoadedVsLoading: React.FunctionComponent<Record<
+  string,
+  unknown
+>> = () => {
   return (
     <Story>
       <SkeletonGroup
@@ -174,8 +177,9 @@ function LoadedVsLoading() {
       </SkeletonGroup>
     </Story>
   );
-}
+};
 
+// @ts-ignore This is a storybook property. TODO: maybe fix this.
 LoadedVsLoading.story = {
   name: "Loaded vs. Loading",
 };

@@ -38,6 +38,12 @@ Check for [TypeScript](https://www.typescriptlang.org/) errors as you edit files
 yarn tsc -w
 ```
 
+Check for [eslint](https://eslint.org/) errors:
+
+```
+yarn lint
+```
+
 ## Alternatives
 
 Most alternative skeleton libraries require the developer to build and maintain a separate skeleton screen that can easily get out of sync with the real screen.

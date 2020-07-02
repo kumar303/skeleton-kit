@@ -50,11 +50,11 @@ export interface Props extends MaybeSkeletonGroupProps {
   className?: string;
 }
 
-export default function SimulatedText({
+const SimulatedText: React.FunctionComponent<Props> = ({
   children,
   className,
   ...groupProps
-}: Props) {
+}) => {
   const [lineHeight, setLineHeight] = useState<null | number>(null);
   const [boxHeight, setBoxHeight] = useState<null | number>(null);
   const [boxWidth, setBoxWidth] = useState<null | number>(null);
@@ -82,7 +82,6 @@ export default function SimulatedText({
         normalContent={children}
         renderSkeleton={() => {
           if (boxWidth && boxHeight && lineHeight) {
-            console.log("RecreatedSpan");
             return (
               <RecreatedSpan
                 className={className}
@@ -92,6 +91,7 @@ export default function SimulatedText({
                 {new Array(Math.round(boxHeight / lineHeight))
                   .fill(1)
                   .map((item, idx) => (
+                    // eslint-disable-next-line react/no-array-index-key
                     <Line key={`${boxHeight}-${boxWidth}-${idx}`}>
                       <SkeletonLine />
                     </Line>
@@ -109,4 +109,6 @@ export default function SimulatedText({
       />
     </MaybeSkeletonGroup>
   );
-}
+};
+
+export default SimulatedText;

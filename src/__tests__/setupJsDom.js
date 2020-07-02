@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle, @typescript-eslint/no-var-requires */
 const { JSDOM } = require("jsdom");
 
 function copyProps(src, target) {
@@ -19,10 +20,10 @@ if (!global.__alreadyAddedJsdomForTesting) {
   global.navigator = {
     userAgent: "node.js",
   };
-  global.requestAnimationFrame = function (callback) {
+  global.requestAnimationFrame = function _requestAnimationFrame(callback) {
     return setTimeout(callback, 0);
   };
-  global.cancelAnimationFrame = function (id) {
+  global.cancelAnimationFrame = function _cancelAnimationFrame(id) {
     clearTimeout(id);
   };
   copyProps(window, global);

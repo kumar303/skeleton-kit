@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import { SkeletonGroup } from "../";
+import { SkeletonGroup } from "..";
 import MaybeSkeleton, { Props as MaybeSkeletonProps } from "./MaybeSkeleton";
 import { SkeletonTheme } from "../theme";
 

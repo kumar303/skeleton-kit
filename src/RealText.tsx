@@ -13,11 +13,11 @@ export interface Props extends MaybeSkeletonGroupProps {
   className?: string;
 }
 
-export default function RealText({
+const RealText: React.FunctionComponent<Props> = ({
   children,
   className,
   ...groupProps
-}: Props) {
+}) => {
   // TODO: this is currently identical to Phrase but I think it might need different text configuration?
   return (
     <MaybeSkeletonGroup {...groupProps}>
@@ -34,4 +34,6 @@ export default function RealText({
       />
     </MaybeSkeletonGroup>
   );
-}
+};
+
+export default RealText;

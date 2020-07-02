@@ -13,7 +13,11 @@ export interface Props extends MaybeSkeletonGroupProps {
   className?: string;
 }
 
-export default function Phrase({ children, className, ...groupProps }: Props) {
+const Phrase: React.FunctionComponent<Props> = ({
+  children,
+  className,
+  ...groupProps
+}) => {
   return (
     <MaybeSkeletonGroup {...groupProps}>
       <MaybeSkeleton
@@ -29,4 +33,6 @@ export default function Phrase({ children, className, ...groupProps }: Props) {
       />
     </MaybeSkeletonGroup>
   );
-}
+};
+
+export default Phrase;

@@ -1,6 +1,6 @@
 import LoadedVsLoading from "./LoadedVsLoading";
-export { default as LoadingTransitions } from "./LoadingTransitions";
 
+export { default as LoadingTransitions } from "./LoadingTransitions";
 export { LoadedVsLoading };
 
 export default {

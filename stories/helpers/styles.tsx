@@ -68,7 +68,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export function Story({ children }: { children: ChildrenType }) {
+type StoryProps = { children: ChildrenType };
+
+export const Story: React.FunctionComponent<StoryProps> = ({ children }) => {
   return (
     <>
       <Reset />
@@ -76,4 +78,4 @@ export function Story({ children }: { children: ChildrenType }) {
       {children}
     </>
   );
-}
+};
