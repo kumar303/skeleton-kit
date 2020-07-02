@@ -174,8 +174,8 @@ const LoadingTransitions: React.FunctionComponent<Record<
   const initialDataIndex = -1;
   const initialContentKey = "";
 
-  const [isLoading, setLoadingState] = useState<boolean>(false);
-  const [isLoadingContent, setLoadingContentState] = useState<boolean>(false);
+  const [isLoading, setLoadingState] = useState<boolean>(true);
+  const [isLoadingContent, setLoadingContentState] = useState<boolean>(true);
   const [dataIndex, setDataIndex] = useState<number>(initialDataIndex);
   const [contentKey, setContentKey] = useState<string>(initialContentKey);
 
@@ -189,6 +189,7 @@ const LoadingTransitions: React.FunctionComponent<Record<
       setDataIndex(i);
       setContentKey(Object.keys(data[i])[0]);
       setLoadingState(false);
+      setLoadingContentState(false);
     }, loadSpeed * 1000);
   };
 

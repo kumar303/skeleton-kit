@@ -7,6 +7,7 @@ import MaybeSkeletonGroup, {
 } from "./MaybeSkeletonGroup";
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 import MaybeSkeleton from "./utils/MaybeSkeleton";
+import { genSentence } from "./utils/text";
 
 export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
@@ -26,8 +27,7 @@ const RealText = componentWithDefaults<Props>()(
             // TODO: make it so all text implementations get access to
             // this, not just RealText.
             const { initialCharCount = defaultInitialCharCount } = theme;
-            // TODO: create words
-            return "X ".repeat(Math.round(initialCharCount / 2));
+            return genSentence(initialCharCount);
           }}
           normalContent={children}
           renderSkeleton={(content) => {
