@@ -6,7 +6,7 @@ import { SkeletonTheme } from "./theme";
 import { Props as SkeletonProps } from "./Skeleton";
 
 describe(__filename, () => {
-  function render(props: SkeletonTheme & Partial<SkeletonProps> = {}) {
+  function render(props: Partial<SkeletonTheme> & Partial<SkeletonProps> = {}) {
     const root = mount(
       <SkeletonGroup {...props}>
         <Skeleton {...props} />

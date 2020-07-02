@@ -1,33 +1,28 @@
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 
-import { Phrase } from ".";
-import InvisibleText from "./InvisibleText";
+import { Phrase, RealText } from ".";
 import { Props as PhraseProps } from "./Phrase";
 
 describe(__filename, () => {
   function render({
     children = "Example text",
-    showSkeletons = true,
     ...moreProps
   }: Partial<PhraseProps> = {}) {
-    const props = { children, showSkeletons, ...moreProps };
-    const root = mount(<Phrase {...props} />);
-    return root.find(Phrase);
+    const props = { children, ...moreProps };
+    return shallow(<Phrase {...props} />);
   }
 
-  it("renders invisible text when showing skeletons", () => {
-    const children = "Some text";
-    const root = render({ children });
-
-    expect(root.text()).toContain(children);
-    expect(root.find(InvisibleText)).toHaveLength(1);
-  });
-
-  it("adds className when showing skeletons", () => {
+  it("configures RealText", () => {
+    const children = "Example of text content";
     const className = "MyCoolClass";
-    const root = render({ className });
+    // This is an example of a theme prop that should be passed along.
+    const color = "rebeccapurple";
+    const root = render({ className, children, color });
 
-    expect(root.find("span").find(`.${className}`)).toHaveLength(1);
+    const text = root.find(RealText);
+    expect(text).toHaveProp("className", className);
+    expect(text).toHaveProp("children", children);
+    expect(text).toHaveProp("color", color);
   });
 });

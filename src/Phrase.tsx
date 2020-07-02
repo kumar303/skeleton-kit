@@ -1,12 +1,8 @@
 import React from "react";
 
-import InvisibleText from "./InvisibleText";
-import Skeleton from "./Skeleton";
-import MaybeSkeletonGroup, {
-  Props as MaybeSkeletonGroupProps,
-} from "./MaybeSkeletonGroup";
+import { RealText } from ".";
+import { Props as MaybeSkeletonGroupProps } from "./MaybeSkeletonGroup";
 import { ChildrenType } from "./utils/typeUtils";
-import MaybeSkeleton from "./utils/MaybeSkeleton";
 
 export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
@@ -19,19 +15,13 @@ const Phrase: React.FunctionComponent<Props> = ({
   ...groupProps
 }) => {
   return (
-    <MaybeSkeletonGroup {...groupProps}>
-      <MaybeSkeleton
-        className={className}
-        normalContent={children}
-        renderSkeleton={(content) => {
-          return (
-            <Skeleton className={className}>
-              <InvisibleText>{content}</InvisibleText>
-            </Skeleton>
-          );
-        }}
-      />
-    </MaybeSkeletonGroup>
+    <RealText
+      className={className}
+      defaultInitialCharCount={12}
+      {...groupProps}
+    >
+      {children}
+    </RealText>
   );
 };
 

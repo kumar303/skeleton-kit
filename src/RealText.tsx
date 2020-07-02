@@ -5,35 +5,43 @@ import Skeleton from "./Skeleton";
 import MaybeSkeletonGroup, {
   Props as MaybeSkeletonGroupProps,
 } from "./MaybeSkeletonGroup";
-import { ChildrenType } from "./utils/typeUtils";
+import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 import MaybeSkeleton from "./utils/MaybeSkeleton";
 
 export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
   className?: string;
+  defaultInitialCharCount: number;
 }
 
-const RealText: React.FunctionComponent<Props> = ({
-  children,
-  className,
-  ...groupProps
-}) => {
-  // TODO: this is currently identical to Phrase but I think it might need different text configuration?
-  return (
-    <MaybeSkeletonGroup {...groupProps}>
-      <MaybeSkeleton
-        className={className}
-        normalContent={children}
-        renderSkeleton={(content) => {
-          return (
-            <Skeleton className={className}>
-              <InvisibleText>{content}</InvisibleText>
-            </Skeleton>
-          );
-        }}
-      />
-    </MaybeSkeletonGroup>
-  );
-};
+const defaultProps: Partial<Props> = { defaultInitialCharCount: 200 };
+
+const RealText = componentWithDefaults<Props>()(
+  ({ children, defaultInitialCharCount, className, ...groupProps }) => {
+    return (
+      <MaybeSkeletonGroup {...groupProps}>
+        <MaybeSkeleton
+          className={className}
+          initialContent={(theme) => {
+            // TODO: make it so all text implementations get access to
+            // this, not just RealText.
+            const { initialCharCount = defaultInitialCharCount } = theme;
+            // TODO: create words
+            return "X ".repeat(Math.round(initialCharCount / 2));
+          }}
+          normalContent={children}
+          renderSkeleton={(content) => {
+            return (
+              <Skeleton className={className}>
+                <InvisibleText>{content}</InvisibleText>
+              </Skeleton>
+            );
+          }}
+        />
+      </MaybeSkeletonGroup>
+    );
+  },
+  defaultProps
+);
 
 export default RealText;

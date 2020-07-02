@@ -12,7 +12,7 @@ describe(__filename, () => {
   function render({
     children = "Example text",
     ...moreProps
-  }: SkeletonTheme & Partial<InvisibleTextProps> = {}) {
+  }: Partial<SkeletonTheme> & Partial<InvisibleTextProps> = {}) {
     const props = { children, ...moreProps };
     return mount(
       <SkeletonGroup {...props}>

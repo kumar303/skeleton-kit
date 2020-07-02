@@ -11,7 +11,7 @@ describe(__filename, () => {
     normalContent = "Example content",
     renderSkeleton = () => <span />,
     ...moreProps
-  }: SkeletonTheme & Partial<MaybeSkeletonProps> = {}) {
+  }: Partial<SkeletonTheme> & Partial<MaybeSkeletonProps> = {}) {
     const props = { className, normalContent, renderSkeleton, ...moreProps };
     const root = mount(
       <SkeletonGroup {...props}>

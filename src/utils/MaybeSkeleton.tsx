@@ -1,15 +1,19 @@
 import React from "react";
 
-import { useTheme } from "../theme";
+import { useTheme, SkeletonTheme } from "../theme";
 import { ChildrenType } from "./typeUtils";
 
 export interface Props {
   normalContent: ChildrenType;
   className: string | undefined;
+  // TODO: make this required once I'm sure that it's a useful way to
+  // configure initial content state.
+  initialContent?: (theme: SkeletonTheme) => string;
   renderSkeleton: (content: ChildrenType) => JSX.Element;
 }
 
 const MaybeSkeleton: React.FunctionComponent<Props> = ({
+  initialContent,
   normalContent,
   className,
   renderSkeleton,
@@ -19,7 +23,12 @@ const MaybeSkeleton: React.FunctionComponent<Props> = ({
     return <span className={className}>{normalContent}</span>;
   }
 
-  return renderSkeleton(normalContent);
+  let content = normalContent;
+  if (initialContent && !content) {
+    content = initialContent(theme);
+  }
+
+  return renderSkeleton(content);
 };
 
 export default MaybeSkeleton;

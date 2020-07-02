@@ -15,6 +15,7 @@ module.exports = {
     "jest/globals": true,
   },
   rules: {
+    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "error",

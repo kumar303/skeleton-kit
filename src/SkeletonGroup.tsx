@@ -4,7 +4,7 @@ import { ThemeContext, ThemeProvider } from "styled-components";
 import { getAppliedTheme, SkeletonTheme } from "./theme";
 import { ChildrenType } from "./utils/typeUtils";
 
-export interface Props extends SkeletonTheme {
+export interface Props extends Partial<SkeletonTheme> {
   children: ChildrenType;
 }
 
