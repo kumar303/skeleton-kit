@@ -7,7 +7,7 @@ import MaybeSkeletonGroup, {
   Props as MaybeSkeletonGroupProps,
 } from "./MaybeSkeletonGroup";
 import { ChildrenType } from "./utils/typeUtils";
-import AsSkeleton from "./utils/AsSkeleton";
+import MaybeSkeleton from "./utils/MaybeSkeleton";
 
 const RefSpan = styled.span`
   box-sizing: border-box;
@@ -77,7 +77,7 @@ export default function SimulatedText({
 
   return (
     <MaybeSkeletonGroup {...groupProps}>
-      <AsSkeleton
+      <MaybeSkeleton
         className={className}
         normalContent={children}
         renderSkeleton={() => {

@@ -2,7 +2,7 @@ import React from "react";
 import { mount } from "enzyme";
 
 import { SkeletonGroup } from "../";
-import AsSkeleton, { Props as AsSkeletonProps } from "./AsSkeleton";
+import MaybeSkeleton, { Props as MaybeSkeletonProps } from "./MaybeSkeleton";
 import { SkeletonTheme } from "../theme";
 
 describe(__filename, () => {
@@ -11,14 +11,14 @@ describe(__filename, () => {
     normalContent = "Example content",
     renderSkeleton = () => <span />,
     ...moreProps
-  }: SkeletonTheme & Partial<AsSkeletonProps> = {}) {
+  }: SkeletonTheme & Partial<MaybeSkeletonProps> = {}) {
     const props = { className, normalContent, renderSkeleton, ...moreProps };
     const root = mount(
       <SkeletonGroup {...props}>
-        <AsSkeleton {...props} />
+        <MaybeSkeleton {...props} />
       </SkeletonGroup>
     );
-    return root.find(AsSkeleton);
+    return root.find(MaybeSkeleton);
   }
 
   it("handles not showing skeletons", () => {

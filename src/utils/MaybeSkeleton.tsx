@@ -9,7 +9,7 @@ export interface Props {
   renderSkeleton: () => JSX.Element;
 }
 
-export default function AsSkeleton({
+export default function MaybeSkeleton({
   normalContent,
   className,
   renderSkeleton,

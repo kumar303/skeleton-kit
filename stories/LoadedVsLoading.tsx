@@ -105,7 +105,7 @@ function renderStrategy(name: string) {
   );
 }
 
-function renderExample({ asSkeleton = false } = {}) {
+function renderExample({ MaybeSkeleton = false } = {}) {
   const Text =
     textImpl[
       radios(
@@ -118,7 +118,7 @@ function renderExample({ asSkeleton = false } = {}) {
       )
     ];
   return (
-    <SkeletonGroup showSkeletons={asSkeleton}>
+    <SkeletonGroup showSkeletons={MaybeSkeleton}>
       <h1>
         <Phrase>Loaded vs. Loading</Phrase>
       </h1>
@@ -169,7 +169,7 @@ function LoadedVsLoading() {
       >
         <Grid pLineHeight={text("Paragraph line-height", "1.4")}>
           <div>{renderExample()}</div>
-          <div>{renderExample({ asSkeleton: true })}</div>
+          <div>{renderExample({ MaybeSkeleton: true })}</div>
         </Grid>
       </SkeletonGroup>
     </Story>

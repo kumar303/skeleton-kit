@@ -7,7 +7,7 @@ import MaybeSkeletonGroup, {
 } from "./MaybeSkeletonGroup";
 import OpacityPulse from "./OpacityPulse";
 import { ChildrenType } from "./utils/typeUtils";
-import AsSkeleton from "./utils/AsSkeleton";
+import MaybeSkeleton from "./utils/MaybeSkeleton";
 
 const Shell = styled.span`
   display: block;
@@ -30,7 +30,7 @@ export default function BorderText({
 }: Props) {
   return (
     <MaybeSkeletonGroup {...groupProps}>
-      <AsSkeleton
+      <MaybeSkeleton
         className={className}
         normalContent={children}
         renderSkeleton={() => {

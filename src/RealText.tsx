@@ -6,7 +6,7 @@ import MaybeSkeletonGroup, {
   Props as MaybeSkeletonGroupProps,
 } from "./MaybeSkeletonGroup";
 import { ChildrenType } from "./utils/typeUtils";
-import AsSkeleton from "./utils/AsSkeleton";
+import MaybeSkeleton from "./utils/MaybeSkeleton";
 
 export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
@@ -21,7 +21,7 @@ export default function RealText({
   // TODO: this is currently identical to Phrase but I think it might need different text configuration?
   return (
     <MaybeSkeletonGroup {...groupProps}>
-      <AsSkeleton
+      <MaybeSkeleton
         className={className}
         normalContent={children}
         renderSkeleton={() => {

@@ -6,7 +6,7 @@ import MaybeSkeletonGroup, {
   Props as MaybeSkeletonGroupProps,
 } from "./MaybeSkeletonGroup";
 import { ChildrenType } from "./utils/typeUtils";
-import AsSkeleton from "./utils/AsSkeleton";
+import MaybeSkeleton from "./utils/MaybeSkeleton";
 
 export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
@@ -16,7 +16,7 @@ export interface Props extends MaybeSkeletonGroupProps {
 export default function Phrase({ children, className, ...groupProps }: Props) {
   return (
     <MaybeSkeletonGroup {...groupProps}>
-      <AsSkeleton
+      <MaybeSkeleton
         className={className}
         normalContent={children}
         renderSkeleton={() => {
