@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { boolean, radios } from "@storybook/addon-knobs";
 
-import { Phrase, RealText as Text, SkeletonGroup } from "../src";
+import { List, Phrase, RealText as Text, SkeletonGroup } from "../src";
 import { Story, colors } from "./helpers/styles";
 
 const Button = styled.button`
@@ -231,29 +231,45 @@ const LoadingTransitions: React.FunctionComponent<Record<
           </Header>
           <Nav>
             <NavList>
-              {Object.keys(info).map((key) => {
-                return (
-                  <NavItem key={key}>
-                    <NavLink
-                      onClick={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        if (showSkeletons) {
-                          // Disable while loading.
-                          return;
+              <List<string>
+                genItemKey={(item) => {
+                  return (
+                    item &&
+                    // In this case, the item is a key (the page title)
+                    // and we know from our contrived dataset that
+                    // it's unique.
+                    item
+                  );
+                }}
+                initialCount={4}
+                items={Object.keys(info)}
+                renderItem={({ item, isSkeleton }) => {
+                  return (
+                    <NavItem>
+                      <NavLink
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          if (item) {
+                            loadContentKey(item);
+                          }
+                        }}
+                        href={
+                          isSkeleton
+                            ? // Disable the link while loading.
+                              undefined
+                            : "#"
                         }
-                        loadContentKey(key);
-                      }}
-                      href="#"
-                    >
-                      <Phrase>{key}</Phrase>
-                      <NavArrow selected={contentKey === key && !showSkeletons}>
-                        &raquo;
-                      </NavArrow>
-                    </NavLink>
-                  </NavItem>
-                );
-              })}
+                      >
+                        <Phrase>{item}</Phrase>
+                        <NavArrow selected={contentKey === item && !isSkeleton}>
+                          &raquo;
+                        </NavArrow>
+                      </NavLink>
+                    </NavItem>
+                  );
+                }}
+              />
             </NavList>
           </Nav>
           <Content>

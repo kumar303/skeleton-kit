@@ -14,6 +14,7 @@ const Phrase: React.FunctionComponent<Props> = ({
   className,
   ...groupProps
 }) => {
+  // TODO: it might be nicer to use a min/max char length randomizer.
   return (
     <RealText
       className={className}
