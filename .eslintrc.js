@@ -33,6 +33,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-console": "error",
     "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
+    "react/require-default-props": "off",
 
     // The following rules are disabled because we use TypeScript.
     "import/no-unresolved": "off",

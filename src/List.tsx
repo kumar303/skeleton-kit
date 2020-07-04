@@ -7,6 +7,10 @@ interface Props<ItemType extends unknown> {
   genItemKey: (item: ItemType | undefined) => string | undefined;
   initialCount: number;
   items: ItemType[];
+  renderAll?: (params: {
+    renderedItems: JSX.Element;
+    hasZeroItems: boolean;
+  }) => JSX.Element;
   renderItem: (params: {
     isSkeleton: boolean;
     item: ItemType | undefined;
@@ -17,6 +21,7 @@ export default function List<ItemType extends unknown>({
   genItemKey,
   initialCount,
   items,
+  renderAll,
   renderItem,
 }: Props<ItemType>): JSX.Element {
   const theme = useTheme();
@@ -39,5 +44,10 @@ export default function List<ItemType extends unknown>({
     );
   }
 
-  return <>{rendered}</>;
+  const genContent = renderAll || (({ renderedItems }) => renderedItems);
+
+  return genContent({
+    renderedItems: <>{rendered}</>,
+    hasZeroItems: !theme.showSkeletons && items.length === 0,
+  });
 }

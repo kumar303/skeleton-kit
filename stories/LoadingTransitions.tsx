@@ -9,23 +9,13 @@ const Button = styled.button`
   width: 100%;
 `;
 
-const Nav = styled.aside`
+const Nav = styled.nav`
   grid-area: L_nav;
 `;
 
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
-`;
-
-const NavItem = styled.li`
-  border: 1px solid ${colors.darkBlue};
-  padding: 1rem;
-  width: 100%;
-
-  &:not(:first-child) {
-    border-top: none;
-  }
 `;
 
 const NavArrow = styled.span<{ selected: boolean }>`
@@ -37,15 +27,35 @@ const NavArrow = styled.span<{ selected: boolean }>`
 `;
 
 const NavLink = styled.a`
-  align-items: center;
-  color: ${colors.darkBlue};
-  display: flex;
   text-decoration: none;
-  white-space: nowrap;
-  width: 100%;
 
   &:hover ${NavArrow} {
     opacity: 0.5;
+  }
+`;
+
+const EmptyNav = styled.span`
+  justify-content: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+`;
+
+const NavItem = styled.li`
+  border: 1px solid ${colors.darkBlue};
+  padding: 1rem;
+  width: 100%;
+
+  &:not(:first-child) {
+    border-top: none;
+  }
+
+  ${NavLink},
+  ${EmptyNav} {
+    align-items: center;
+    color: ${colors.darkBlue};
+    display: flex;
+    white-space: nowrap;
+    width: 100%;
   }
 `;
 
@@ -54,34 +64,56 @@ const Content = styled.section`
   padding: 0;
 `;
 
-const Grid = styled.div`
+const gridRows = (rows: string[]) => rows.map((r) => `"${r}"`).join(" ");
+
+interface GridProps {
+  isEmpty: boolean;
+}
+
+const Grid = styled.div<GridProps>`
   display: grid;
   grid-gap: 2rem;
-  grid-template-areas:
-    "L_header L_header"
-    "L_nav L_content";
+  grid-template-areas: ${(props) => {
+    if (props.isEmpty) {
+      return gridRows(["L_header L_header L_header", "L_nav L_nav L_nav"]);
+    }
+    return gridRows([
+      "L_header L_header L_header",
+      "L_nav L_content L_content",
+    ]);
+  }};
   grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin: 2rem;
   width: auto;
+
+  ${Button},
+  ${NavLink},
+  ${EmptyNav},
+  ${Content} {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
 
   @media (min-width: 900px) {
     margin-left: auto;
     margin-right: auto;
     width: 900px;
-  }
 
-  ${Button},
-  ${NavLink},
-  ${Content} {
-    font-size: 1.6rem;
-    line-height: 1.6;
+    ${Button},
+    ${NavLink},
+    ${EmptyNav},
+    ${Content} {
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
   }
 `;
 
 const Header = styled.header`
   display: flex;
   grid-area: L_header;
+  justify-content: space-evenly;
 
   & :not(:last-child) {
     margin-right: 2rem;
@@ -179,6 +211,11 @@ const LoadingTransitions: React.FunctionComponent<Record<
   const [dataIndex, setDataIndex] = useState<number>(initialDataIndex);
   const [contentKey, setContentKey] = useState<string>(initialContentKey);
 
+  const resetState = () => {
+    setDataIndex(initialDataIndex);
+    setContentKey(initialContentKey);
+  };
+
   const loadNextSet = () => {
     setLoadingState(true);
     setTimeout(() => {
@@ -188,6 +225,15 @@ const LoadingTransitions: React.FunctionComponent<Record<
       }
       setDataIndex(i);
       setContentKey(Object.keys(data[i])[0]);
+      setLoadingState(false);
+      setLoadingContentState(false);
+    }, loadSpeed * 1000);
+  };
+
+  const loadEmptySet = () => {
+    setLoadingState(true);
+    setTimeout(() => {
+      resetState();
       setLoadingState(false);
       setLoadingContentState(false);
     }, loadSpeed * 1000);
@@ -206,16 +252,16 @@ const LoadingTransitions: React.FunctionComponent<Record<
   }, [loadSpeed]);
 
   const seeInitial = () => {
-    setDataIndex(initialDataIndex);
-    setContentKey(initialContentKey);
+    resetState();
     loadNextSet();
   };
 
   const info: { [key: string]: string | undefined } | undefined =
     dataIndex >= 0 ? data[dataIndex] : {};
-  const content = info ? info[contentKey] : undefined;
+  const copy = info ? info[contentKey] : undefined;
 
   const showSkeletons = forceLoading || isLoading;
+  const showContentSkeleton = showSkeletons || isLoadingContent;
 
   return (
     <Story>
@@ -224,65 +270,78 @@ const LoadingTransitions: React.FunctionComponent<Record<
         color={colors.darkBlue}
         showSkeletons={showSkeletons}
       >
-        <Grid>
-          <Header>
-            <Button onClick={seeInitial}>See Initial Loading State</Button>
-            <Button onClick={loadNextSet}>Load Next Set</Button>
-          </Header>
-          <Nav>
-            <NavList>
-              <List<string>
-                genItemKey={(item) => {
-                  return (
-                    item &&
-                    // In this case, the item is a key (the page title)
-                    // and we know from our contrived dataset that
-                    // it's unique.
-                    item
-                  );
-                }}
-                initialCount={4}
-                items={Object.keys(info)}
-                renderItem={({ item, isSkeleton }) => {
-                  return (
-                    <NavItem>
-                      <NavLink
-                        onClick={(event) => {
-                          event.preventDefault();
-                          event.stopPropagation();
-                          if (item) {
-                            loadContentKey(item);
-                          }
-                        }}
-                        href={
-                          isSkeleton
-                            ? // Disable the link while loading.
-                              undefined
-                            : "#"
-                        }
-                      >
-                        <Phrase>{item}</Phrase>
-                        <NavArrow selected={contentKey === item && !isSkeleton}>
-                          &raquo;
-                        </NavArrow>
-                      </NavLink>
-                    </NavItem>
-                  );
-                }}
-              />
-            </NavList>
-          </Nav>
-          <Content>
-            <SkeletonGroup showSkeletons={showSkeletons || isLoadingContent}>
-              <Title>
-                <Phrase color={colors.darkPink}>{contentKey}</Phrase>
-              </Title>
-              <p>
-                <Text color={colors.black}>{content}</Text>
-              </p>
-            </SkeletonGroup>
-          </Content>
-        </Grid>
+        <List<string>
+          genItemKey={(item) => {
+            return (
+              item &&
+              // In this case, item is the the page title and we
+              // know from our contrived dataset that it's unique.
+              item
+            );
+          }}
+          initialCount={4}
+          items={Object.keys(info)}
+          renderItem={({ item, isSkeleton }) => {
+            return (
+              <NavItem>
+                <NavLink
+                  onClick={(event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (item) {
+                      loadContentKey(item);
+                    }
+                  }}
+                  href={
+                    isSkeleton
+                      ? // Disable the link while loading.
+                        undefined
+                      : "#"
+                  }
+                >
+                  <Phrase>{item}</Phrase>
+                  <NavArrow selected={contentKey === item && !isSkeleton}>
+                    &raquo;
+                  </NavArrow>
+                </NavLink>
+              </NavItem>
+            );
+          }}
+          renderAll={({ renderedItems, hasZeroItems }) => {
+            return (
+              <Grid isEmpty={hasZeroItems}>
+                <Header>
+                  <Button onClick={seeInitial}>See Initial State</Button>
+                  <Button onClick={loadNextSet}>Change Set</Button>
+                  <Button onClick={loadEmptySet}>Load Empty Set</Button>
+                </Header>
+                <Nav>
+                  <NavList>
+                    {hasZeroItems ? (
+                      <NavItem>
+                        <EmptyNav>No results</EmptyNav>
+                      </NavItem>
+                    ) : (
+                      renderedItems
+                    )}
+                  </NavList>
+                </Nav>
+                {!hasZeroItems && (
+                  <Content>
+                    <SkeletonGroup showSkeletons={showContentSkeleton}>
+                      <Title>
+                        <Phrase color={colors.darkPink}>{contentKey}</Phrase>
+                      </Title>
+                      <p>
+                        <Text color={colors.black}>{copy}</Text>
+                      </p>
+                    </SkeletonGroup>
+                  </Content>
+                )}
+              </Grid>
+            );
+          }}
+        />
       </SkeletonGroup>
     </Story>
   );
