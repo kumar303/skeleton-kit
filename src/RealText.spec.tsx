@@ -12,8 +12,7 @@ describe(__filename, () => {
     ...moreProps
   }: Partial<RealTextProps> = {}) {
     const props = { children, showSkeletons, ...moreProps };
-    const root = mount(<RealText {...props} />);
-    return root.find(RealText);
+    return mount(<RealText {...props} />);
   }
 
   it("renders invisible text when showing skeletons", () => {
