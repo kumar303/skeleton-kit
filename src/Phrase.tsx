@@ -12,15 +12,10 @@ export interface Props extends MaybeSkeletonGroupProps {
 const Phrase: React.FunctionComponent<Props> = ({
   children,
   className,
-  ...groupProps
+  ...textProps
 }) => {
-  // TODO: it might be nicer to use a min/max char length randomizer.
   return (
-    <RealText
-      className={className}
-      defaultInitialCharCount={12}
-      {...groupProps}
-    >
+    <RealText className={className} defaultInitialCharCount={12} {...textProps}>
       {children}
     </RealText>
   );

@@ -26,6 +26,7 @@ const RealText = componentWithDefaults<Props>()(
           initialContent={(theme) => {
             // TODO: make it so all text implementations get access to
             // this, not just RealText.
+            // TODO: add an optional min/max char length randomizer.
             const { initialCharCount = defaultInitialCharCount } = theme;
             return genSentence(initialCharCount);
           }}
