@@ -1,24 +1,26 @@
 import React from "react";
 
 import { RealText } from ".";
-import { Props as MaybeSkeletonGroupProps } from "./MaybeSkeletonGroup";
-import { ChildrenType } from "./utils/typeUtils";
+import { Props as RealTextProps } from "./RealText";
+import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 
-export interface Props extends MaybeSkeletonGroupProps {
+export interface Props extends RealTextProps {
   children: ChildrenType;
   className?: string;
 }
 
-const Phrase: React.FunctionComponent<Props> = ({
-  children,
-  className,
-  ...textProps
-}) => {
-  return (
-    <RealText className={className} defaultInitialCharCount={12} {...textProps}>
-      {children}
-    </RealText>
-  );
-};
+const defaultProps: Partial<Props> = { defaultInitialCharCount: 12 };
+
+const Phrase = componentWithDefaults<Props>()(
+  ({ children, className, defaultInitialCharCount, ...textProps }) => {
+    const allTextProps = { defaultInitialCharCount, ...textProps };
+    return (
+      <RealText className={className} {...allTextProps}>
+        {children}
+      </RealText>
+    );
+  },
+  defaultProps
+);
 
 export default Phrase;

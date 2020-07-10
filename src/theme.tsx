@@ -8,6 +8,7 @@ export interface SkeletonTheme {
   borderRadius: string;
   color: string;
   initialCharCount: number | undefined;
+  initialCharCountRange: [number, number] | undefined;
   showSkeletons: boolean;
 }
 
@@ -19,6 +20,7 @@ export function getAppliedTheme(theme: Partial<SkeletonTheme>): SkeletonTheme {
     // TODO: consider detecting inherited color
     color: theme.color ?? "rgb(129, 129, 129, 1)",
     initialCharCount: theme.initialCharCount,
+    initialCharCountRange: theme.initialCharCountRange,
     showSkeletons: theme.showSkeletons ?? false,
   };
 

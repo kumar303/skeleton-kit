@@ -26,9 +26,34 @@ const RealText = componentWithDefaults<Props>()(
           initialContent={(theme) => {
             // TODO: make it so all text implementations get access to
             // this, not just RealText.
-            // TODO: add an optional min/max char length randomizer.
-            const { initialCharCount = defaultInitialCharCount } = theme;
-            return genSentence(initialCharCount);
+            const {
+              initialCharCount = defaultInitialCharCount,
+              initialCharCountRange,
+            } = theme;
+
+            let count = initialCharCount;
+
+            if (initialCharCountRange !== undefined) {
+              if (
+                !Array.isArray(initialCharCountRange) ||
+                initialCharCountRange[0] === undefined ||
+                initialCharCountRange[1] === undefined
+              ) {
+                throw new Error(
+                  "initialCharCountRange must be an array of two numbers (min, max)"
+                );
+              }
+              const [min, max] = initialCharCountRange;
+              if (min > max) {
+                throw new Error(
+                  `initialCharCountRange of [${min}, ${max}] has a minimum value greater than the maximum value`
+                );
+              }
+
+              count = min + Math.round(Math.random() * (max - min));
+            }
+
+            return genSentence(count);
           }}
           normalContent={children}
           renderSkeleton={(content) => {

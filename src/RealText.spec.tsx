@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import { mount, shallow } from "enzyme";
 
@@ -56,5 +57,57 @@ describe(__filename, () => {
     expect(renderInitialContent({ theme: { initialCharCount } })).toHaveLength(
       initialCharCount
     );
+  });
+
+  it("can generate variable width initial content", () => {
+    // Set this just to make sure our range overrides it.
+    const initialCharCount = 500;
+    const min = 20;
+    const max = 25;
+    const initialCharCountRange: [number, number] = [min, max];
+
+    const content = renderInitialContent({
+      theme: { initialCharCount, initialCharCountRange },
+    });
+    expect(content.length).toBeGreaterThanOrEqual(min);
+    expect(content.length).toBeLessThanOrEqual(max);
+  });
+
+  it("cannot accept an initialCharCountRange with min higher than max", () => {
+    const min = 30;
+    const max = 20;
+    const initialCharCountRange: [number, number] = [min, max];
+
+    expect(() =>
+      renderInitialContent({
+        theme: { initialCharCountRange },
+      })
+    ).toThrow(/has a minimum value greater than the maximum value/);
+  });
+
+  it("cannot accept a non-array initialCharCountRange", () => {
+    const initialCharCountRange = 12;
+
+    expect(() =>
+      renderInitialContent({
+        theme: {
+          // @ts-ignore: this type is intentionally wrong.
+          initialCharCountRange,
+        },
+      })
+    ).toThrow(/initialCharCountRange must be an array of two numbers/);
+  });
+
+  it("cannot accept an initialCharCountRange with missing values", () => {
+    const initialCharCountRange = [12];
+
+    expect(() =>
+      renderInitialContent({
+        theme: {
+          // @ts-ignore: this type is intentionally wrong.
+          initialCharCountRange,
+        },
+      })
+    ).toThrow(/initialCharCountRange must be an array of two numbers/);
   });
 });
