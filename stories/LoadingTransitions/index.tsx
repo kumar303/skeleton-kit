@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { boolean, radios } from "@storybook/addon-knobs";
 
-import { List, Phrase, RealText as Text, SkeletonGroup } from "../../src";
+import { List, Phrase, Text, SkeletonGroup } from "../../src";
 import { Story, colors } from "../helpers/styles";
 import {
   Button,

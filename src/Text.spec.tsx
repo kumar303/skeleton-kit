@@ -2,14 +2,14 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 
-import { RealText } from ".";
+import { Text } from ".";
 import InvisibleText from "./InvisibleText";
-import { Props as RealTextProps } from "./RealText";
+import { Props as TextProps } from "./Text";
 import { SkeletonTheme, getAppliedTheme } from "./theme";
 import MaybeSkeleton, { InitialContent } from "./utils/MaybeSkeleton";
 
 describe(__filename, () => {
-  type RenderProps = Partial<RealTextProps>;
+  type RenderProps = Partial<TextProps>;
 
   function getRenderProps({
     children = "Example text",
@@ -20,14 +20,14 @@ describe(__filename, () => {
   }
 
   function render(props: RenderProps = {}) {
-    return mount(<RealText {...getRenderProps(props)} />);
+    return mount(<Text {...getRenderProps(props)} />);
   }
 
   function renderInitialContent({
     props = {},
     theme = {},
   }: { props?: RenderProps; theme?: Partial<SkeletonTheme> } = {}) {
-    const root = shallow(<RealText {...getRenderProps(props)} />);
+    const root = shallow(<Text {...getRenderProps(props)} />);
     const maybe = root.find(MaybeSkeleton);
 
     expect(maybe).toHaveLength(1);

@@ -13,13 +13,13 @@ import {
 import {
   BorderText,
   Phrase,
-  RealText,
+  Text as TextImpl,
   SkeletonGroup,
   SimulatedText,
 } from "../../src";
 
 const textImpl = {
-  realistic: RealText,
+  realistic: TextImpl,
   simulated: SimulatedText,
   "border-hack": BorderText,
 };

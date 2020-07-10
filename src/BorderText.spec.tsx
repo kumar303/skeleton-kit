@@ -1,7 +1,7 @@
 import React from "react";
 import { mount, shallow } from "enzyme";
 
-import { BorderText, RealText } from ".";
+import { BorderText, Text } from ".";
 import InvisibleText from "./InvisibleText";
 import { Props as BorderTextProps } from "./BorderText";
 import { RenderSkeleton } from "./utils/MaybeSkeleton";
@@ -22,7 +22,7 @@ describe(__filename, () => {
     props = {},
   } = {}) {
     const root = render(props);
-    const text = root.find(RealText);
+    const text = root.find(Text);
 
     expect(text).toHaveProp("renderSkeleton");
     const renSkel = text.prop("renderSkeleton") as RenderSkeleton;

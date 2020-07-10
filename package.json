@@ -12,6 +12,7 @@
     "build-storybook": "build-storybook",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx {src,stories}",
     "prepublishOnly": "yarn build",
+    "prettier-check": "prettier --check {src,stories}",
     "storybook": "start-storybook -p 6006",
     "test": "jest",
     "tsc": "tsc"

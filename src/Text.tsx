@@ -18,7 +18,7 @@ export interface Props extends MaybeSkeletonGroupProps {
 
 export const defaultProps: Partial<Props> = { defaultInitialCharCount: 200 };
 
-const RealText = componentWithDefaults<Props>()(
+const Text = componentWithDefaults<Props>()(
   ({
     children,
     defaultInitialCharCount,
@@ -78,4 +78,4 @@ const RealText = componentWithDefaults<Props>()(
   defaultProps
 );
 
-export default RealText;
+export default Text;

@@ -1,11 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { RealText } from ".";
-import {
-  Props as RealTextProps,
-  defaultProps as realTextDefaultProps,
-} from "./RealText";
+import { Text } from ".";
+import { Props as TextProps, defaultProps as defaultTextProps } from "./Text";
 import InvisibleText from "./InvisibleText";
 import OpacityPulse from "./OpacityPulse";
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
@@ -19,7 +16,7 @@ const BorderSkeleton = styled(OpacityPulse)`
   border-top: ${(props) => `0.8em solid ${props.theme.color}`};
 `;
 
-export interface Props extends RealTextProps {
+export interface Props extends TextProps {
   children: ChildrenType;
   className?: string;
 }
@@ -27,7 +24,7 @@ export interface Props extends RealTextProps {
 const BorderText = componentWithDefaults<Props>()(
   ({ className, ...textProps }) => {
     return (
-      <RealText
+      <Text
         className={className}
         renderSkeleton={(content) => {
           return (
@@ -42,7 +39,7 @@ const BorderText = componentWithDefaults<Props>()(
       />
     );
   },
-  realTextDefaultProps
+  defaultTextProps
 );
 
 export default BorderText;

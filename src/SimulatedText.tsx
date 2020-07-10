@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { RealText } from ".";
-import {
-  Props as RealTextProps,
-  defaultProps as realTextDefaultProps,
-} from "./RealText";
+import { Text } from ".";
+import { Props as TextProps, defaultProps as defaultTextProps } from "./Text";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
@@ -46,7 +43,7 @@ const SkeletonLine = styled(Skeleton)`
   width: 100%;
 `;
 
-export interface Props extends RealTextProps {
+export interface Props extends TextProps {
   className?: string;
 }
 
@@ -73,7 +70,7 @@ const SimulatedText = componentWithDefaults<Props>()(
     }, [shell]);
 
     return (
-      <RealText
+      <Text
         className={className}
         renderSkeleton={(content) => {
           if (boxWidth && boxHeight && lineHeight) {
@@ -105,7 +102,7 @@ const SimulatedText = componentWithDefaults<Props>()(
       />
     );
   },
-  realTextDefaultProps
+  defaultTextProps
 );
 
 export default SimulatedText;

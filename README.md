@@ -44,6 +44,12 @@ Check for [eslint](https://eslint.org/) errors:
 yarn lint
 ```
 
+Check for [prettier](https://prettier.io/) formatting errors:
+
+```
+yarn prettier-check
+```
+
 ## Alternatives
 
 Most alternative skeleton libraries require the developer to build and maintain a separate skeleton screen that can easily get out of sync with the real screen.

@@ -1,10 +1,10 @@
 import React from "react";
 
-import { RealText } from ".";
-import { Props as RealTextProps } from "./RealText";
+import { Text } from ".";
+import { Props as TextProps } from "./Text";
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 
-export interface Props extends RealTextProps {
+export interface Props extends TextProps {
   children: ChildrenType;
   className?: string;
 }
@@ -15,9 +15,9 @@ const Phrase = componentWithDefaults<Props>()(
   ({ children, className, defaultInitialCharCount, ...textProps }) => {
     const allTextProps = { defaultInitialCharCount, ...textProps };
     return (
-      <RealText className={className} {...allTextProps}>
+      <Text className={className} {...allTextProps}>
         {children}
-      </RealText>
+      </Text>
     );
   },
   defaultProps
