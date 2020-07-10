@@ -12,6 +12,8 @@ describe(__filename, () => {
     ...moreProps
   }: Partial<SimulatedTextProps> = {}) {
     const props = { children, showSkeletons, ...moreProps };
+    // TODO: maybe switch to shallow rendering like BorderText.spec
+    // TODO: also test useEffect(), though, which needs mount()
     const root = mount(<SimulatedText {...props} />);
     return root.find(SimulatedText);
   }

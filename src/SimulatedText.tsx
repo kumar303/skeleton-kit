@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
+import { RealText } from ".";
+import {
+  Props as RealTextProps,
+  defaultProps as realTextDefaultProps,
+} from "./RealText";
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
-import MaybeSkeletonGroup, {
-  Props as MaybeSkeletonGroupProps,
-} from "./MaybeSkeletonGroup";
-import { ChildrenType } from "./utils/typeUtils";
-import MaybeSkeleton from "./utils/MaybeSkeleton";
+import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 
 const RefSpan = styled.span`
   box-sizing: border-box;
@@ -45,41 +46,35 @@ const SkeletonLine = styled(Skeleton)`
   width: 100%;
 `;
 
-export interface Props extends MaybeSkeletonGroupProps {
-  children: ChildrenType;
+export interface Props extends RealTextProps {
   className?: string;
 }
 
-const SimulatedText: React.FunctionComponent<Props> = ({
-  children,
-  className,
-  ...groupProps
-}) => {
-  const [lineHeight, setLineHeight] = useState<null | number>(null);
-  const [boxHeight, setBoxHeight] = useState<null | number>(null);
-  const [boxWidth, setBoxWidth] = useState<null | number>(null);
-  const shell = useRef<HTMLParagraphElement>(null);
+const SimulatedText = componentWithDefaults<Props>()(
+  ({ className, ...textProps }) => {
+    const [lineHeight, setLineHeight] = useState<null | number>(null);
+    const [boxHeight, setBoxHeight] = useState<null | number>(null);
+    const [boxWidth, setBoxWidth] = useState<null | number>(null);
+    const shell = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
-    if (shell && shell.current) {
-      setLineHeight(
-        parseFloat(
-          window
-            .getComputedStyle(shell.current, null)
-            .getPropertyValue("line-height")
-        )
-      );
-      const rect = shell.current.getBoundingClientRect();
-      setBoxHeight(rect.height);
-      setBoxWidth(rect.width);
-    }
-  }, [shell]);
+    useEffect(() => {
+      if (shell && shell.current) {
+        setLineHeight(
+          parseFloat(
+            window
+              .getComputedStyle(shell.current, null)
+              .getPropertyValue("line-height")
+          )
+        );
+        const rect = shell.current.getBoundingClientRect();
+        setBoxHeight(rect.height);
+        setBoxWidth(rect.width);
+      }
+    }, [shell]);
 
-  return (
-    <MaybeSkeletonGroup {...groupProps}>
-      <MaybeSkeleton
+    return (
+      <RealText
         className={className}
-        normalContent={children}
         renderSkeleton={(content) => {
           if (boxWidth && boxHeight && lineHeight) {
             return (
@@ -106,9 +101,11 @@ const SimulatedText: React.FunctionComponent<Props> = ({
             </RefSpan>
           );
         }}
+        {...textProps}
       />
-    </MaybeSkeletonGroup>
-  );
-};
+    );
+  },
+  realTextDefaultProps
+);
 
 export default SimulatedText;

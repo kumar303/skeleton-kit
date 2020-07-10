@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+import { RealText } from ".";
+import {
+  Props as RealTextProps,
+  defaultProps as realTextDefaultProps,
+} from "./RealText";
 import InvisibleText from "./InvisibleText";
-import MaybeSkeletonGroup, {
-  Props as MaybeSkeletonGroupProps,
-} from "./MaybeSkeletonGroup";
 import OpacityPulse from "./OpacityPulse";
-import { ChildrenType } from "./utils/typeUtils";
-import MaybeSkeleton from "./utils/MaybeSkeleton";
+import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 
 const Shell = styled.span`
   display: block;
@@ -18,21 +19,16 @@ const BorderSkeleton = styled(OpacityPulse)`
   border-top: ${(props) => `0.8em solid ${props.theme.color}`};
 `;
 
-export interface Props extends MaybeSkeletonGroupProps {
+export interface Props extends RealTextProps {
   children: ChildrenType;
   className?: string;
 }
 
-const BorderText: React.FunctionComponent<Props> = ({
-  children,
-  className,
-  ...groupProps
-}) => {
-  return (
-    <MaybeSkeletonGroup {...groupProps}>
-      <MaybeSkeleton
+const BorderText = componentWithDefaults<Props>()(
+  ({ className, ...textProps }) => {
+    return (
+      <RealText
         className={className}
-        normalContent={children}
         renderSkeleton={(content) => {
           return (
             <Shell className={className}>
@@ -42,9 +38,11 @@ const BorderText: React.FunctionComponent<Props> = ({
             </Shell>
           );
         }}
+        {...textProps}
       />
-    </MaybeSkeletonGroup>
-  );
-};
+    );
+  },
+  realTextDefaultProps
+);
 
 export default BorderText;

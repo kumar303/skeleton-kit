@@ -5,13 +5,13 @@ import { ChildrenType } from "./typeUtils";
 
 export type InitialContent = (theme: SkeletonTheme) => string;
 
+export type RenderSkeleton = (content: ChildrenType) => JSX.Element;
+
 export interface Props {
   normalContent: ChildrenType;
   className: string | undefined;
-  // TODO: make this required once I'm sure that it's a useful way to
-  // configure initial content state.
-  initialContent?: InitialContent;
-  renderSkeleton: (content: ChildrenType) => JSX.Element;
+  initialContent: InitialContent;
+  renderSkeleton: RenderSkeleton;
 }
 
 const MaybeSkeleton: React.FunctionComponent<Props> = ({

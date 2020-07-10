@@ -6,26 +6,31 @@ import MaybeSkeletonGroup, {
   Props as MaybeSkeletonGroupProps,
 } from "./MaybeSkeletonGroup";
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
-import MaybeSkeleton from "./utils/MaybeSkeleton";
+import MaybeSkeleton, { RenderSkeleton } from "./utils/MaybeSkeleton";
 import { genSentence } from "./utils/text";
 
 export interface Props extends MaybeSkeletonGroupProps {
   children: ChildrenType;
   className?: string;
   defaultInitialCharCount: number;
+  renderSkeleton?: RenderSkeleton;
 }
 
-const defaultProps: Partial<Props> = { defaultInitialCharCount: 200 };
+export const defaultProps: Partial<Props> = { defaultInitialCharCount: 200 };
 
 const RealText = componentWithDefaults<Props>()(
-  ({ children, defaultInitialCharCount, className, ...groupProps }) => {
+  ({
+    children,
+    defaultInitialCharCount,
+    className,
+    renderSkeleton,
+    ...groupProps
+  }) => {
     return (
       <MaybeSkeletonGroup {...groupProps}>
         <MaybeSkeleton
           className={className}
           initialContent={(theme) => {
-            // TODO: make it so all text implementations get access to
-            // this, not just RealText.
             const {
               initialCharCount = defaultInitialCharCount,
               initialCharCountRange,
@@ -56,13 +61,16 @@ const RealText = componentWithDefaults<Props>()(
             return genSentence(count);
           }}
           normalContent={children}
-          renderSkeleton={(content) => {
-            return (
-              <Skeleton className={className}>
-                <InvisibleText>{content}</InvisibleText>
-              </Skeleton>
-            );
-          }}
+          renderSkeleton={
+            renderSkeleton ??
+            ((content) => {
+              return (
+                <Skeleton className={className}>
+                  <InvisibleText>{content}</InvisibleText>
+                </Skeleton>
+              );
+            })
+          }
         />
       </MaybeSkeletonGroup>
     );
