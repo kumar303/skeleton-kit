@@ -21,6 +21,7 @@ describe(__filename, () => {
   }
 
   function render(props: RenderProps = {}) {
+    // TODO: this entire suite can probably just use shallow rendering.
     return mount(<Text {...getRenderProps(props)} />);
   }
 
