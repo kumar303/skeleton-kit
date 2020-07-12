@@ -29,7 +29,6 @@ const Text = componentWithDefaults<Props>()(
     return (
       <MaybeSkeletonGroup {...groupProps}>
         <MaybeSkeleton
-          className={className}
           initialContent={(theme) => {
             const {
               initialCharCount = defaultInitialCharCount,
@@ -60,6 +59,8 @@ const Text = componentWithDefaults<Props>()(
 
             return genSentence(count);
           }}
+          // TODO: should this be wrapped in className for consistency?
+          // If so, MaybeSkeleton would need a renderNormalContent() prop
           normalContent={children}
           renderSkeleton={
             renderSkeleton ??

@@ -31,15 +31,12 @@ describe(__filename, () => {
   it("handles not showing skeletons", () => {
     const renderSkeleton = jest.fn();
     const normalContent = "Some content";
-    const className = "MyCoolClass";
     const root = render({
-      className,
       normalContent,
       renderSkeleton,
       showSkeletons: false,
     });
 
-    expect(root.childAt(0)).toHaveClassName(className);
     expect(root.text()).toEqual(normalContent);
     expect(renderSkeleton).not.toHaveBeenCalled();
   });

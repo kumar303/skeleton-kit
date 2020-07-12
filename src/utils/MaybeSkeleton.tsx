@@ -9,7 +9,6 @@ export type RenderSkeleton = (content: ChildrenType) => JSX.Element;
 
 export interface Props {
   normalContent: ChildrenType;
-  className: string | undefined;
   initialContent: InitialContent;
   renderSkeleton: RenderSkeleton;
 }
@@ -17,12 +16,11 @@ export interface Props {
 const MaybeSkeleton: React.FunctionComponent<Props> = ({
   initialContent,
   normalContent,
-  className,
   renderSkeleton,
 }) => {
   const theme = useTheme();
   if (!theme.showSkeletons) {
-    return <span className={className}>{normalContent}</span>;
+    return <>{normalContent}</>;
   }
 
   let content = normalContent;

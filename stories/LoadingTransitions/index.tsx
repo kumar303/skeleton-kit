@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { boolean, radios } from "@storybook/addon-knobs";
 
 import { List, Phrase, Text, SkeletonGroup } from "../../src";
 import { Story, colors } from "../helpers/styles";
+import { getLoadSpeed, getForcedLoading } from "../helpers/knobs";
 import {
   Button,
   Content,
@@ -78,15 +78,8 @@ const LoadingTransitions: React.FunctionComponent<Record<
   string,
   unknown
 >> = () => {
-  const loadSpeed = parseFloat(
-    radios(
-      "Loading speed (seconds)",
-      { "0.1": "0.1", "0.5": "0.5", "3": "3", "5": "5" },
-      "3"
-    )
-  );
-
-  const forceLoading = boolean("Show loading state", false);
+  const loadSpeed = getLoadSpeed();
+  const forceLoading = getForcedLoading();
 
   const initialDataIndex = -1;
   const initialContentKey = "";

@@ -1,9 +1,10 @@
-import LoadedVsLoading from "./LoadedVsLoading";
+import LoadingTransitions from "./LoadingTransitions";
 
-export { default as LoadingTransitions } from "./LoadingTransitions";
-export { LoadedVsLoading };
+export { default as Images } from "./Images";
+export { default as LoadedVsLoading } from "./LoadedVsLoading";
+export { LoadingTransitions };
 
 export default {
   title: "Stories",
-  component: LoadedVsLoading,
+  component: LoadingTransitions,
 };
