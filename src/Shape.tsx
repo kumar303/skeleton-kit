@@ -14,7 +14,7 @@ interface ShellProps {
   kind: "box" | "circle";
 }
 
-const Shell = styled.div<ShellProps>`
+export const Shell = styled.div<ShellProps>`
   border-radius: ${(props) => (props.kind === "circle" ? "50%" : "0")};
   display: flex;
   height: ${(props) => props.heightStyle};
@@ -47,8 +47,8 @@ const Shape = componentWithDefaults<Props>()(
       <Shell
         className={className}
         heightStyle={heightStyle}
-        widthStyle={widthStyle}
         kind={kind}
+        widthStyle={widthStyle}
       >
         {content}
       </Shell>

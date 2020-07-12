@@ -7,6 +7,7 @@ import InvisibleText from "./InvisibleText";
 import { Props as TextProps } from "./Text";
 import { SkeletonTheme, getAppliedTheme } from "./theme";
 import MaybeSkeleton, { InitialContent } from "./utils/MaybeSkeleton";
+import { getRenderedMaybeProp } from "./__tests__/helpers";
 
 describe(__filename, () => {
   type RenderProps = Partial<TextProps>;
@@ -27,13 +28,10 @@ describe(__filename, () => {
     props = {},
     theme = {},
   }: { props?: RenderProps; theme?: Partial<SkeletonTheme> } = {}) {
-    const root = shallow(<Text {...getRenderProps(props)} />);
-    const maybe = root.find(MaybeSkeleton);
-
-    expect(maybe).toHaveLength(1);
-    expect(maybe).toHaveProp("initialContent");
-
-    const initialContent = maybe.prop("initialContent") as InitialContent;
+    const initialContent = getRenderedMaybeProp<InitialContent>(
+      shallow(<Text {...getRenderProps(props)} />),
+      "initialContent"
+    );
     return initialContent(getAppliedTheme(theme));
   }
 

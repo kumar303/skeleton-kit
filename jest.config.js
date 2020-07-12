@@ -5,6 +5,7 @@ module.exports = {
   testPathIgnorePatterns: [
     "/node_modules/",
     "<rootDir>/build/",
+    "<rootDir>/src/__tests__/helpers.*",
     "<rootDir>/src/__tests__/setup.*",
   ],
   // This needs to match the url in __tests__/setupJsDom.js
