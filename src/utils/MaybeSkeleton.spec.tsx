@@ -41,6 +41,18 @@ describe(__filename, () => {
     expect(renderSkeleton).not.toHaveBeenCalled();
   });
 
+  it("lets you wrap normal content output", () => {
+    const className = "WrappedClass";
+    const root = render({
+      renderNormalContent: (content) => {
+        return <div className={className}>{content}</div>;
+      },
+      showSkeletons: false,
+    });
+
+    expect(root.find(`.${className}`)).toHaveLength(1);
+  });
+
   it("handles showing skeletons with normal content", () => {
     const innerClassName = "CustomClass";
 

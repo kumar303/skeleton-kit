@@ -6,7 +6,7 @@ import { Text } from ".";
 import InvisibleText from "./InvisibleText";
 import { Props as TextProps } from "./Text";
 import { SkeletonTheme, getAppliedTheme } from "./theme";
-import MaybeSkeleton, { InitialContent } from "./utils/MaybeSkeleton";
+import { InitialContent, RenderNormalContent } from "./utils/MaybeSkeleton";
 import { getRenderedMaybeProp } from "./__tests__/helpers";
 
 describe(__filename, () => {
@@ -24,12 +24,16 @@ describe(__filename, () => {
     return mount(<Text {...getRenderProps(props)} />);
   }
 
+  function shallowRender(props: RenderProps = {}) {
+    return shallow(<Text {...getRenderProps(props)} />);
+  }
+
   function renderInitialContent({
     props = {},
     theme = {},
   }: { props?: RenderProps; theme?: Partial<SkeletonTheme> } = {}) {
     const initialContent = getRenderedMaybeProp<InitialContent>(
-      shallow(<Text {...getRenderProps(props)} />),
+      shallowRender(props),
       "initialContent"
     );
     return initialContent(getAppliedTheme(theme));
@@ -48,6 +52,17 @@ describe(__filename, () => {
     const root = render({ className });
 
     expect(root.find("span").find(`.${className}`)).toHaveLength(1);
+  });
+
+  it("adds className when rendering normal content", () => {
+    const className = "MyCoolClass";
+    const renderNormalContent = getRenderedMaybeProp<RenderNormalContent>(
+      shallowRender({ className }),
+      "renderNormalContent"
+    );
+    const root = shallow(<span>{renderNormalContent("Example content")}</span>);
+
+    expect(root.find(`.${className}`)).toHaveLength(1);
   });
 
   it("generates initial content using genSentence()", () => {
