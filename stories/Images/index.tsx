@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { radios } from "@storybook/addon-knobs";
 
-import { Phrase, Shape, SkeletonGroup, Text } from "../../src";
+import { Phrase, SkeletonGroup, Text } from "../../src";
 import { Story, colors } from "../helpers/styles";
 import { getLoadSpeed, getForcedLoading } from "../helpers/knobs";
-import { Content, ImageBy, ShapeShell, Shell, Img } from "./styled";
+import {
+  Content,
+  ImageBy,
+  ShapeShell,
+  Shell,
+  Img,
+  StyledShape,
+} from "./styled";
 // @ts-ignore: TODO: figure out image imports
 import gossamerImageSrc from "./images/gossamer.jpg";
 
@@ -39,7 +46,7 @@ const Images: React.FunctionComponent<Record<string, unknown>> = () => {
           </h1>
           <Content>
             <ShapeShell>
-              <Shape
+              <StyledShape
                 // Use a dominant color from the image.
                 color="#557136"
                 kind={shapeKind}
@@ -47,7 +54,7 @@ const Images: React.FunctionComponent<Record<string, unknown>> = () => {
                 widthStyle="100%"
               >
                 <Img src={gossamerImageSrc} />
-              </Shape>
+              </StyledShape>
               <ImageBy>
                 <Phrase color={colors.black}>
                   <a href="https://inaturalist.ca/photos/1970631">

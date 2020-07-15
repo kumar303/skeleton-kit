@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import { Shape } from "../../src";
 import { colors } from "../helpers/styles";
 
 export const Shell = styled.div`
@@ -42,15 +43,19 @@ export const Img = styled.img`
 `;
 
 export const ShapeShell = styled.div`
-  display: grid;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   float: right;
-  grid-gap: 1rem;
-  grid-template-rows: 200px auto;
-  justify-items: center;
   margin: 0 0 1rem 1rem;
   width: 200px;
 `;
 
+export const StyledShape = styled(Shape)`
+  height: 200px;
+`;
+
 export const ImageBy = styled.div`
   font-size: 0.9rem;
+  margin-top: 1rem;
 `;
