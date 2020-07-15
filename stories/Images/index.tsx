@@ -17,7 +17,7 @@ import gossamerImageSrc from "./images/gossamer.jpg";
 
 const Images: React.FunctionComponent<Record<string, unknown>> = () => {
   const shapeKind = radios(
-    "Kind of shape",
+    "Image shape",
     { box: "box", circle: "circle" },
     "circle"
   );
