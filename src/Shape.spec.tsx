@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import { shallow } from "enzyme";
 
@@ -48,5 +49,18 @@ describe(__filename, () => {
     expect(shell).toHaveClassName(className);
     // Make sure the children were not rendered as part of the skeleton.
     expect(shell.find(`.${childrenClassName}`)).not.toHaveLength(1);
+  });
+
+  it("accepts a valid kind", () => {
+    expect(() => render({ kind: "box" })).not.toThrow();
+  });
+
+  it("throws for an invalid kind", () => {
+    expect(() =>
+      render({
+        // @ts-ignore this is intentionally invalid
+        kind: "invalid",
+      })
+    ).toThrow(/must be one of .*box.*circle/);
   });
 });

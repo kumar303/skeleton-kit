@@ -8,10 +8,15 @@ import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 import MaybeSkeleton from "./utils/MaybeSkeleton";
 import OpacityPulse from "./OpacityPulse";
 
+enum ShapeKind {
+  box = "box",
+  circle = "circle",
+}
+
 interface ShellProps {
   heightStyle: string;
   widthStyle: string;
-  kind: "box" | "circle";
+  kind: keyof typeof ShapeKind;
 }
 
 export const Shell = styled.div<ShellProps>`
@@ -43,6 +48,13 @@ export const defaultProps: Partial<Props> = {
 
 const Shape = componentWithDefaults<Props>()(
   ({ children, className, heightStyle, widthStyle, kind, ...groupProps }) => {
+    if (!ShapeKind[kind]) {
+      throw new Error(
+        `kind must be one of ${Object.keys(ShapeKind)
+          .map((s) => `"${s}"`)
+          .join(", ")}`
+      );
+    }
     const wrap = (content: ChildrenType) => (
       <Shell
         className={className}
