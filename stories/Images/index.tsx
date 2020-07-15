@@ -35,7 +35,7 @@ const Images: React.FunctionComponent<Record<string, unknown>> = () => {
       >
         <Shell>
           <h1>
-            <Phrase color={colors.darkBlue}>Gossamer-winged Butterly</Phrase>
+            <Phrase color={colors.darkBlue}>Gossamer-winged Butterfly</Phrase>
           </h1>
           <Content>
             <ShapeShell>

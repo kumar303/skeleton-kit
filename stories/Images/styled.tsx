@@ -5,11 +5,16 @@ import { colors } from "../helpers/styles";
 export const Shell = styled.div`
   h1 {
     color: ${colors.darkBlue};
-    display: flex;
-    font-size: 5rem;
-    justify-content: center;
+    font-size: 3rem;
     line-height: 1;
     margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 700px) {
+    h1 {
+      font-size: 5rem;
+    }
   }
 
   p {

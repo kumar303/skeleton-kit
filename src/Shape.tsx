@@ -21,9 +21,7 @@ interface ShellProps {
 
 export const Shell = styled.div<ShellProps>`
   border-radius: ${(props) => (props.kind === "circle" ? "50%" : "0")};
-  display: flex;
   height: ${(props) => props.heightStyle};
-  justify-content: center;
   overflow: hidden;
   width: ${(props) => props.widthStyle};
 `;
