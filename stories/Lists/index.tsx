@@ -74,12 +74,9 @@ const data = [
   },
 ];
 
-const LoadingTransitions: React.FunctionComponent<Record<
-  string,
-  unknown
->> = () => {
-  const loadSpeed = getLoadSpeed();
+const ListsStory: React.FunctionComponent<Record<string, unknown>> = () => {
   const forceLoading = getForcedLoading();
+  const loadSpeed = getLoadSpeed();
 
   const initialDataIndex = -1;
   const initialContentKey = "";
@@ -225,4 +222,4 @@ const LoadingTransitions: React.FunctionComponent<Record<
   );
 };
 
-export default LoadingTransitions;
+export default ListsStory;

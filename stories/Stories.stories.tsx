@@ -1,10 +1,10 @@
-import LoadingTransitions from "./LoadingTransitions";
+import Lists from "./Lists";
 
 export { default as Images } from "./Images";
-export { default as LoadedVsLoading } from "./LoadedVsLoading";
-export { LoadingTransitions };
+export { default as Text } from "./Text";
+export { Lists };
 
 export default {
   title: "Stories",
-  component: LoadingTransitions,
+  component: Lists,
 };

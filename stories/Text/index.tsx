@@ -19,9 +19,9 @@ import {
 } from "../../src";
 
 const textImpl = {
-  realistic: TextImpl,
-  simulated: SimulatedText,
-  "border-hack": BorderText,
+  Text: TextImpl,
+  SimulatedText,
+  BorderText,
 };
 
 function renderStrategy(name: string) {
@@ -29,7 +29,7 @@ function renderStrategy(name: string) {
     <TextStrategy>
       <StrategyPill>
         <SkeletonGroup color={colors.white}>
-          <StrategyHeader>Text strategy</StrategyHeader>
+          <StrategyHeader>Component</StrategyHeader>
           <PillPhrase>{name}</PillPhrase>
         </SkeletonGroup>
       </StrategyPill>
@@ -41,20 +41,20 @@ function renderExample({ showSkeletons = false } = {}) {
   const Text =
     textImpl[
       radios(
-        "Text strategy",
+        "Component",
         // Zip the keys into an options object.
         Object.keys(textImpl).reduce((a, k) => {
           return { ...a, [k]: k };
         }, {}),
-        "realistic"
+        "Text"
       )
     ];
   return (
     <SkeletonGroup showSkeletons={showSkeletons}>
       <h1>
-        <Phrase>Loaded vs. Loading</Phrase>
+        <Phrase>Text Variants</Phrase>
       </h1>
-      {renderStrategy("realistic")}
+      {renderStrategy("<Text>")}
       <p>
         <Text>
           Notice how the skeletons on the right mirror the layout. They preserve
@@ -63,12 +63,12 @@ function renderExample({ showSkeletons = false } = {}) {
       </p>
       <p>
         <Text>
-          The <em>realistic</em> strategy has some limitations, though. For
-          example, you can adjust the line-height to see how the paragraph
-          skeletons squish together as you approach numbers like 1.1.
+          This strategy has some limitations, though. For example, you can
+          adjust the line-height to see how the paragraph skeletons squish
+          together as you approach numbers like 1.1.
         </Text>
       </p>
-      {renderStrategy("simulated")}
+      {renderStrategy("<SimulatedText>")}
       <p>
         <Text>
           Try switching to a simulated text strategy and a line-height of 1.1.
@@ -76,7 +76,7 @@ function renderExample({ showSkeletons = false } = {}) {
           does not perfectly mirror the block height.
         </Text>
       </p>
-      {renderStrategy("border-hack")}
+      {renderStrategy("<BorderText>")}
       <p>
         <Text>
           This uses a border-top to render skeleton lines. It handles tight
@@ -88,10 +88,7 @@ function renderExample({ showSkeletons = false } = {}) {
   );
 }
 
-const LoadedVsLoading: React.FunctionComponent<Record<
-  string,
-  unknown
->> = () => {
+const TextStory: React.FunctionComponent<Record<string, unknown>> = () => {
   return (
     <Story>
       <SkeletonGroup
@@ -111,9 +108,4 @@ const LoadedVsLoading: React.FunctionComponent<Record<
   );
 };
 
-// @ts-ignore This is a storybook property. TODO: maybe fix this.
-LoadedVsLoading.story = {
-  name: "Loaded vs. Loading",
-};
-
-export default LoadedVsLoading;
+export default TextStory;
