@@ -32,7 +32,7 @@ export interface Props extends MaybeSkeletonGroupProps, ShellProps {
 }
 
 const SkeletonShape = styled(OpacityPulse)`
-  background-color: ${(props) => props.theme.color};
+  background-color: ${(props) => props.theme.skeletonKit.color};
   display: block;
   height: 100%;
   width: 100%;

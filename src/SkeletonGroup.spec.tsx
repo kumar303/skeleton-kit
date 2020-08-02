@@ -2,9 +2,9 @@ import React from "react";
 import { mount } from "enzyme";
 
 import { SkeletonGroup } from ".";
-import { SkeletonTheme, useTheme } from "./theme";
+import { GlobalTheme, useTheme } from "./theme";
 
-const ThemeCatcher: React.FunctionComponent<{ theme: SkeletonTheme }> = () => {
+const ThemeCatcher: React.FunctionComponent<{ theme: GlobalTheme }> = () => {
   return <span />;
 };
 
@@ -13,7 +13,7 @@ const ExampleComponent: React.FunctionComponent<Record<
   unknown
 >> = () => {
   const theme = useTheme();
-  return <ThemeCatcher theme={theme} />;
+  return <ThemeCatcher theme={{ skeletonKit: theme }} />;
 };
 
 describe(__filename, () => {
@@ -34,8 +34,8 @@ describe(__filename, () => {
       </SkeletonGroup>
     );
 
-    expect(theme.color).toEqual(color);
-    expect(theme.borderRadius).toEqual(borderRadius);
+    expect(theme.skeletonKit.color).toEqual(color);
+    expect(theme.skeletonKit.borderRadius).toEqual(borderRadius);
   });
 
   it("merges nested themes", () => {
@@ -50,8 +50,8 @@ describe(__filename, () => {
       </SkeletonGroup>
     );
 
-    expect(theme.color).toEqual(color);
-    expect(theme.borderRadius).toEqual(borderRadius);
+    expect(theme.skeletonKit.color).toEqual(color);
+    expect(theme.skeletonKit.borderRadius).toEqual(borderRadius);
   });
 
   it("gives precedence to nearest group value", () => {
@@ -65,6 +65,6 @@ describe(__filename, () => {
       </SkeletonGroup>
     );
 
-    expect(theme.color).toEqual(color);
+    expect(theme.skeletonKit.color).toEqual(color);
   });
 });

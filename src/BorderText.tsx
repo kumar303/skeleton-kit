@@ -13,7 +13,7 @@ const Shell = styled.span`
 `;
 
 const BorderSkeleton = styled(OpacityPulse)`
-  border-top: ${(props) => `0.8em solid ${props.theme.color}`};
+  border-top: ${(props) => `0.8em solid ${props.theme.skeletonKit.color}`};
 `;
 
 export interface Props extends TextProps {

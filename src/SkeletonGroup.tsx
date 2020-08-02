@@ -12,12 +12,22 @@ const SkeletonGroup: React.FunctionComponent<Props> = ({
   children,
   ...theme
 }) => {
-  // TODO: should skeleton theme props be namespaced so they don't
-  // collide with user defined themes within styled-components?
   const themeContext = useContext(ThemeContext);
-  const appliedTheme = getAppliedTheme({ ...themeContext, ...theme });
+  const appliedTheme = getAppliedTheme({
+    ...themeContext?.skeletonKit,
+    ...theme,
+  });
 
-  return <ThemeProvider theme={appliedTheme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider
+      theme={{
+        // Provide a namespaced theme to avoid collisions with user themes.
+        skeletonKit: appliedTheme,
+      }}
+    >
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default SkeletonGroup;

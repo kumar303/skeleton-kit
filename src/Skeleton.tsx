@@ -5,8 +5,8 @@ import OpacityPulse from "./OpacityPulse";
 import { ChildrenType } from "./utils/typeUtils";
 
 const StyledSpan = styled(OpacityPulse)`
-  background-color: ${(props) => props.theme.color};
-  border-radius: ${(props) => props.theme.borderRadius};
+  background-color: ${(props) => props.theme.skeletonKit.color};
+  border-radius: ${(props) => props.theme.skeletonKit.borderRadius};
   box-decoration-break: clone;
 `;
 
