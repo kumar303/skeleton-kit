@@ -7,17 +7,24 @@ import "focus-visible";
 import { ChildrenType } from "../../src/utils/typeUtils";
 
 // I just took an eye dropper and matched some Storybook colors to
-// make it lok consistent.
+// make it look consistent.
 export const colors = {
   black: "#3c3c3c",
   darkBlue: "#1ea7fd",
   darkPink: "#ff4785",
   lightBlue: "#c0e4fc",
   lightPink: "#fb9fc1",
+  lightGray: "#c5c7ca",
+  lighterGray: "#e1e3e5",
+  panelGray: "#f6f9fc",
   white: "#fff",
 };
 
 const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
   html {
     font-size: 16px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -29,14 +36,14 @@ const GlobalStyle = createGlobalStyle`
     font-feature-settings: "kern", "liga", "dlig", "hlig";
   }
 
-  * {
-    box-sizing: border-box;
-  }
-
   body {
     background-color: ${colors.white};
     color: ${colors.black};
     margin: 1rem;
+  }
+
+  code {
+    font-family: Courier, Monaco, monospace;
   }
 
   em {
@@ -64,6 +71,15 @@ const GlobalStyle = createGlobalStyle`
 
     &:not(.focus-visible) {
       outline: none;
+    }
+  }
+
+  a {
+    color: ${colors.darkBlue};
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
     }
   }
 `;
