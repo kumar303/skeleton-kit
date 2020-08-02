@@ -10,6 +10,8 @@ export interface SkeletonTheme {
   initialCharCount: number | undefined;
   initialCharCountRange: [number, number] | undefined;
   showSkeletons: boolean;
+  loopDurationMinSec: number;
+  loopDurationMaxSec: number;
 }
 
 export interface GlobalTheme {
@@ -25,6 +27,8 @@ export function getAppliedTheme(theme: Partial<SkeletonTheme>): SkeletonTheme {
     color: theme.color ?? "rgb(129, 129, 129, 1)",
     initialCharCount: theme.initialCharCount,
     initialCharCountRange: theme.initialCharCountRange,
+    loopDurationMinSec: theme.loopDurationMinSec ?? 2,
+    loopDurationMaxSec: theme.loopDurationMaxSec ?? 3.5,
     showSkeletons: theme.showSkeletons ?? false,
   };
 
