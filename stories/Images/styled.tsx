@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { Shape } from "../../src";
 import { colors } from "../helpers/styles";
 
 export const Shell = styled.div`
@@ -49,10 +48,6 @@ export const ShapeShell = styled.div`
   float: right;
   margin: 0 0 1rem 1rem;
   width: 200px;
-`;
-
-export const StyledShape = styled(Shape)`
-  height: 200px;
 `;
 
 export const ImageBy = styled.div`

@@ -1,25 +1,48 @@
 import React from "react";
-import styled from "styled-components";
+import memoize from "lodash.memoize";
+import { View, Text as NativeText } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import { Text } from ".";
 import { Props as TextProps, defaultProps as defaultTextProps } from "./Text";
 import InvisibleText from "./InvisibleText";
 import OpacityPulse from "./OpacityPulse";
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
+import { useTheme } from "./theme";
 
-const Shell = styled.span`
-  display: block;
-  transform: translateY(1em);
-`;
-
-const BorderSkeleton = styled(OpacityPulse)`
-  border-top: ${(props) => `0.8em solid ${props.theme.color}`};
-`;
+const getStyles = memoize((color: string) => {
+  return EStyleSheet.create({
+    shell: {
+      display: "block",
+      transform: "translateY(1em)",
+    },
+    skeleton: {
+      borderTopWidth: "0.8em",
+      borderTopColor: color,
+    },
+  });
+});
 
 export interface Props extends TextProps {
   children: ChildrenType;
   className?: string;
 }
+
+const BorderSkeleton: React.FunctionComponent<{ children: ChildrenType }> = ({
+  children,
+}) => {
+  const theme = useTheme();
+  const styles = getStyles(theme.color);
+  return (
+    <View style={styles.shell}>
+      <OpacityPulse>
+        <NativeText style={styles.skeleton}>
+          <InvisibleText>{children}</InvisibleText>
+        </NativeText>
+      </OpacityPulse>
+    </View>
+  );
+};
 
 const BorderText = componentWithDefaults<Props>()(
   ({ className, ...textProps }) => {
@@ -27,13 +50,7 @@ const BorderText = componentWithDefaults<Props>()(
       <Text
         className={className}
         renderSkeleton={(content) => {
-          return (
-            <Shell className={className}>
-              <BorderSkeleton>
-                <InvisibleText>{content}</InvisibleText>
-              </BorderSkeleton>
-            </Shell>
-          );
+          return <BorderSkeleton>{content}</BorderSkeleton>;
         }}
         {...textProps}
       />

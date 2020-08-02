@@ -1,5 +1,8 @@
-import React from "react";
+import * as React from "react";
+import { View } from "react-native";
 import styled from "styled-components";
+import memoize from "lodash.memoize";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import MaybeSkeletonGroup, {
   Props as MaybeSkeletonGroupProps,
@@ -7,6 +10,7 @@ import MaybeSkeletonGroup, {
 import { ChildrenType, componentWithDefaults } from "./utils/typeUtils";
 import MaybeSkeleton from "./utils/MaybeSkeleton";
 import OpacityPulse from "./OpacityPulse";
+import { useTheme } from "./theme";
 
 enum ShapeKind {
   box = "box",
@@ -19,6 +23,7 @@ interface ShellProps {
   kind: keyof typeof ShapeKind;
 }
 
+// TODO: fix tests that depend on this and remove it.
 export const Shell = styled.div<ShellProps>`
   border-radius: ${(props) => (props.kind === "circle" ? "50%" : "0")};
   height: ${(props) => props.heightStyle};
@@ -26,17 +31,46 @@ export const Shell = styled.div<ShellProps>`
   width: ${(props) => props.widthStyle};
 `;
 
+const getStyles = memoize(
+  (kind: keyof typeof ShapeKind, heightStyle: string, widthStyle: string) => {
+    return EStyleSheet.create({
+      view: {
+        height: heightStyle,
+        overflow: "hidden",
+        width: widthStyle,
+        borderRadius: kind === "circle" ? "50%" : "0",
+      },
+    });
+  }
+);
+
+const skeletonShapeStyles = EStyleSheet.create({
+  skeleton: {
+    display: "block",
+    height: "100%",
+    width: "100%",
+  },
+});
+
+const SkeletonShape: React.FunctionComponent = () => {
+  const theme = useTheme();
+  return (
+    <OpacityPulse
+      style={[
+        skeletonShapeStyles.skeleton,
+        {
+          backgroundColor: theme.color,
+        },
+      ]}
+    />
+  );
+};
+
 export interface Props extends MaybeSkeletonGroupProps, ShellProps {
   children: ChildrenType;
+  // TODO: remove this
   className?: string;
 }
-
-const SkeletonShape = styled(OpacityPulse)`
-  background-color: ${(props) => props.theme.color};
-  display: block;
-  height: 100%;
-  width: 100%;
-`;
 
 export const defaultProps: Partial<Props> = {
   heightStyle: "100px",
@@ -45,7 +79,7 @@ export const defaultProps: Partial<Props> = {
 };
 
 const Shape = componentWithDefaults<Props>()(
-  ({ children, className, heightStyle, widthStyle, kind, ...groupProps }) => {
+  ({ children, heightStyle, widthStyle, kind, ...groupProps }) => {
     if (!ShapeKind[kind]) {
       throw new Error(
         `kind must be one of ${Object.keys(ShapeKind)
@@ -53,16 +87,12 @@ const Shape = componentWithDefaults<Props>()(
           .join(", ")}`
       );
     }
+    const styles = getStyles(kind, heightStyle, widthStyle);
+
     const wrap = (content: ChildrenType) => (
-      <Shell
-        className={className}
-        heightStyle={heightStyle}
-        kind={kind}
-        widthStyle={widthStyle}
-      >
-        {content}
-      </Shell>
+      <View style={styles.view}>{content}</View>
     );
+
     return (
       <MaybeSkeletonGroup {...groupProps}>
         <MaybeSkeleton

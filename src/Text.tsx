@@ -16,8 +16,11 @@ export interface Props extends MaybeSkeletonGroupProps {
   renderSkeleton?: RenderSkeleton;
 }
 
-export const defaultProps: Partial<Props> = { defaultInitialCharCount: 200 };
+export const defaultProps: Partial<Props> = {
+  defaultInitialCharCount: 200,
+};
 
+// TODO: rename to LongText to avoid clash with react-native.
 const Text = componentWithDefaults<Props>()(
   ({
     children,

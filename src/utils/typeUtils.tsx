@@ -13,7 +13,7 @@ type CompWithDefaults<
   }; // new defaults
 
 /*
- * Returns a React.FunctionalComponent with defaultProps.
+ * Returns a React.FunctionComponent with defaultProps.
  *
  * Example:
  *
@@ -46,3 +46,5 @@ export function componentWithDefaults<Props>() {
     return comp as any;
   };
 }
+
+export type StyleType = Record<string, unknown> | Record<string, unknown>[];
