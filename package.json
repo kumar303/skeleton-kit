@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rimraf build && tsc -p tsconfig-esm.json && tsc -p tsconfig-cjs.json",
     "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx {src,stories}",
     "prepublishOnly": "yarn build",
     "prettier-check": "prettier --check {src,stories}",
@@ -32,6 +33,7 @@
     "@storybook/addons": "^6.0.12",
     "@storybook/preset-typescript": "^3.0.0",
     "@storybook/react": "^6.0.12",
+    "@storybook/storybook-deployer": "^2.8.6",
     "@types/enzyme": "^3.10.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.0",
