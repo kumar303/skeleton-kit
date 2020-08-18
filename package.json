@@ -6,7 +6,7 @@
   "files": [
     "src/"
   ],
-  "license": "MPL 2.0",
+  "license": "MPL-2.0",
   "scripts": {
     "build": "rimraf build && tsc -p tsconfig-esm.json && tsc -p tsconfig-cjs.json",
     "build-storybook": "build-storybook",
