@@ -19,7 +19,14 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "error",
-    "import/extensions": ["error", "never"],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        // This is for importing storybook modules.
+        stories: "always",
+      },
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {

@@ -1,25 +1,11 @@
 module.exports = {
-  stories: ["../stories/**/*.stories.[tj]s[x]"],
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
   addons: [
-    "@storybook/preset-typescript",
     "@storybook/addon-knobs",
     "@storybook/addon-links",
+    "@storybook/addon-essentials",
   ],
-  webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: [
-        {
-          loader: require.resolve("ts-loader"),
-          options: { configFile: "tsconfig.json" },
-        },
-        // Optional
-        {
-          loader: require.resolve("react-docgen-typescript-loader"),
-        },
-      ],
-    });
-    config.resolve.extensions.push(".ts", ".tsx");
-    return config;
-  },
 };
