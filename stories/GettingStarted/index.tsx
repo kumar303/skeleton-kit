@@ -42,7 +42,7 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
             </Title>
             <P>
               <Text color={colors.darkPink}>
-                Low maintenance, pixel perfect skeleton screens.
+                Low maintenance, pixel perfect skeleton screens
               </Text>
             </P>
           </Heading>
