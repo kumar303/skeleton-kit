@@ -6,13 +6,14 @@ import LinkTo from "@storybook/addon-links/react";
 import { Phrase, Text, SkeletonGroup } from "../../src";
 import { Story, colors } from "../helpers/styles";
 import {
-  BulletItem,
+  DashedUL,
   EmojiItem,
   ExampleDef,
   ExampleGrid,
   ExampleLink,
   H3,
   Heading,
+  LI,
   Main,
   P,
   Title,
@@ -57,8 +58,7 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           </P>
           <P>
             This library helps you build robust skeleton screens in{" "}
-            <a href="https://reactjs.org/">React</a> by way of strong
-            conventions.
+            <a href="https://reactjs.org/">React</a>.
           </P>
           <H3>Goals</H3>
           <UL>
@@ -125,15 +125,13 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
             </ExampleDef>
           </ExampleGrid>
           <H3>TODO</H3>
-          <UL>
-            <BulletItem>Add interface documentation</BulletItem>
-            <BulletItem>Support React Native</BulletItem>
-            <BulletItem>Make the interface a little less verbose</BulletItem>
-            <BulletItem>Make sure virtual lists are well supported</BulletItem>
-            <BulletItem>
-              Use local storage to make initial skeletons nicer
-            </BulletItem>
-          </UL>
+          <DashedUL>
+            <LI>Add interface documentation</LI>
+            <LI>Support React Native</LI>
+            <LI>Make the interface a little less verbose</LI>
+            <LI>Make sure virtual lists are well supported</LI>
+            <LI>Use local storage to make initial skeletons nicer</LI>
+          </DashedUL>
           <H3>Alternatives</H3>
           <P>
             Most alternative skeleton libraries require the developer to design
@@ -141,22 +139,26 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
             sync. However, here are a few libraries that share similar goals
             with <code>skeleton-kit</code>:
           </P>
-          <UL>
-            <BulletItem>
-              <a href="https://github.com/alexZajac/react-native-skeleton-content">
-                react-native-skeleton-content
-              </a>{" "}
-              is a React Native libary that adapts to layouts in a similar
-              manner
-            </BulletItem>
-            <BulletItem>
-              <a href="https://github.com/dvtng/react-loading-skeleton">
-                react-loading-skeleton
-              </a>{" "}
-              automatically adapts to web layouts but is limited in what it can
-              do
-            </BulletItem>
-          </UL>
+          <DashedUL>
+            <LI>
+              <span>
+                <a href="https://github.com/alexZajac/react-native-skeleton-content">
+                  react-native-skeleton-content
+                </a>{" "}
+                is a React Native libary that adapts to layouts in a similar
+                manner
+              </span>
+            </LI>
+            <LI>
+              <span>
+                <a href="https://github.com/dvtng/react-loading-skeleton">
+                  react-loading-skeleton
+                </a>{" "}
+                automatically adapts to web layouts but is limited in what it
+                can do
+              </span>
+            </LI>
+          </DashedUL>
         </Main>
       </SkeletonGroup>
     </Story>

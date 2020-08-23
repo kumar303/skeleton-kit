@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { colors } from "../helpers/styles";
 
+const INDENT = 3;
+
 export const Title = styled.h2`
   color: ${colors.darkBlue};
   font-size: 6rem;
@@ -43,7 +45,7 @@ export const Heading = styled.div`
 
 export const LI = styled.li`
   display: flex;
-  margin: 0 0 0.5rem 3rem;
+  margin: 0 0 0.5rem ${INDENT}rem;
 `;
 
 export const UL = styled(P).attrs({ as: "ul" })``;
@@ -53,12 +55,6 @@ export const Main = styled.main`
     margin: auto;
     width: 900px;
   }
-`;
-
-export const Emoji = styled.span`
-  display: flex;
-  justify-content: center;
-  width: 3rem;
 `;
 
 const BulletShell = styled.div`
@@ -84,16 +80,25 @@ export const Bullet: React.FC<Record<string, unknown>> = () => {
   );
 };
 
-export const BulletItem: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  return (
-    <LI>
-      <Bullet />
-      <span>{children}</span>
-    </LI>
-  );
-};
+export const DashedUL = styled(UL)`
+  position: relative;
+
+  ${LI}::before {
+    color: ${colors.darkPink};
+    content: "-";
+    position: absolute;
+    left: ${INDENT / 2}rem;
+  }
+`;
+
+export const Emoji = styled.span`
+  display: flex;
+  width: 2rem;
+`;
+
+const EmojiLI = styled(LI)`
+  margin-left: ${INDENT / 2}rem;
+`;
 
 export const EmojiItem: React.FC<{
   emoji: string;
@@ -101,12 +106,12 @@ export const EmojiItem: React.FC<{
   text: React.ReactNode;
 }> = ({ emoji, emojiAlt, text }) => {
   return (
-    <LI>
+    <EmojiLI>
       <Emoji role="img" aria-label={emojiAlt}>
         {emoji}️
       </Emoji>
       <span>{text}</span>
-    </LI>
+    </EmojiLI>
   );
 };
 
