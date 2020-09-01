@@ -4,6 +4,8 @@ Here's how to set yourself up to develop features for `skeleton-kit`.
 
 ## Installation
 
+[Node.JS](https://nodejs.org/en/) 10 or higher is required.
+
 Install [yarn](https://yarnpkg.com/) then type this to install all dependencies:
 
 ```
