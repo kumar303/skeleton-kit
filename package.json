@@ -11,9 +11,9 @@
     "build": "rimraf build && tsc -p tsconfig-esm.json && tsc -p tsconfig-cjs.json",
     "build-storybook": "build-storybook",
     "deploy-storybook": "storybook-to-ghpages",
-    "lint": "eslint --ext .js,.ts,.jsx,.tsx {src,stories}",
+    "lint": "eslint --ext .js,.ts,.jsx,.tsx .",
     "prepublishOnly": "yarn build",
-    "prettier-check": "prettier --check {src,stories}",
+    "prettier-check": "prettier --check .",
     "storybook": "start-storybook -p 6006",
     "test": "jest",
     "tsc": "tsc"
