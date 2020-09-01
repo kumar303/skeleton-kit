@@ -1,0 +1,11 @@
+# Exclude everything by default
+*.*
+# Exclude these directories
+/build/
+/node_modules/
+# Include files we want to process
+!*.js
+!*.jsx
+!*.ts
+!*.tsx
+!*.md
