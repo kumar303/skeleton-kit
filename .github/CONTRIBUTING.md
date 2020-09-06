@@ -1,6 +1,6 @@
 # Contributing
 
-Here's how to set yourself up to develop features for `skeleton-kit`.
+Here's how to get started developing features for `skeleton-kit`. Thanks for helping out!
 
 ## Installation
 
@@ -46,7 +46,7 @@ yarn prettier-check
 
 ## Deploying Storybook
 
-To deploy the Storybook build, first create a [GitHub token](https://github.com/settings/tokens) with all `repo` scopes. Run this from the `main` branch to deploy:
+To deploy the Storybook build, first create a [GitHub token](https://github.com/settings/tokens/new?scopes=repo) with all `repo` scopes. Run this from the `main` branch to deploy:
 
 ```
 GH_TOKEN=[your_token] yarn deploy-storybook

@@ -22,7 +22,7 @@ import {
 } from "./styles";
 import ListsExample from "../Examples-0-Lists.stories";
 import ImagesExample from "../Examples-1-Images.stories";
-import TextExample from "../Examples-2-Text.stories";
+// import TextExample from "../Examples-2-Text.stories";
 
 const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
   const [isLoading, setLoadingState] = useState<boolean>(true);
@@ -117,12 +117,12 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
               <LinkTo kind={ImagesExample.title}>Images</LinkTo>
             </ExampleLink>
             <ExampleDef>Add square or circular image placeholders</ExampleDef>
-            <ExampleLink>
+            {/* <ExampleLink>
               <LinkTo kind={TextExample.title}>Text</LinkTo>
             </ExampleLink>
             <ExampleDef>
               Compare alternate strategies for replacing text
-            </ExampleDef>
+            </ExampleDef> */}
           </ExampleGrid>
           <H3>TODO</H3>
           <DashedUL>
