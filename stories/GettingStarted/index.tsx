@@ -124,13 +124,27 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
               Compare alternate strategies for replacing text
             </ExampleDef> */}
           </ExampleGrid>
-          <H3>TODO</H3>
+          <H3>TODO / ideas</H3>
           <DashedUL>
             <LI>Add interface documentation</LI>
-            <LI>Support React Native</LI>
             <LI>Make the interface a little less verbose</LI>
-            <LI>Make sure virtual lists are well supported</LI>
-            <LI>Use local storage to make initial skeletons nicer</LI>
+            <LI>
+              Make sure virtual lists are well supported (
+              <a href="https://github.com/kumar303/skeleton-kit/issues/1">#1</a>
+              )
+            </LI>
+            <LI>
+              Recall stored state to make initial skeletons nicer (
+              <a href="https://github.com/kumar303/skeleton-kit/issues/10">
+                #10
+              </a>
+              )
+            </LI>
+            <LI>
+              Maybe support React Native (
+              <a href="https://github.com/kumar303/skeleton-kit/issues/9">#9</a>
+              )
+            </LI>
           </DashedUL>
           <H3>Alternatives</H3>
           <P>
