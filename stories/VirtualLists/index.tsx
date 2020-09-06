@@ -1,9 +1,13 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, useCallback, useState } from "react";
 
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
 
 import { Story } from "../helpers/styles";
+
+type Item = {
+  name: string;
+};
 
 function ExampleWrapper({
   // Are there more items to load?
@@ -22,7 +26,7 @@ function ExampleWrapper({
 }: {
   hasNextPage: boolean;
   isNextPageLoading: boolean;
-  items: { name: string }[];
+  items: Item[];
   loadNextPage: (startIndex: number, stopIndex: number) => Promise<any> | null;
 }) {
   // If there are more items to be loaded then add an extra row to hold a loading indicator.
@@ -69,62 +73,38 @@ function ExampleWrapper({
   );
 }
 
-type Props = Record<string, unknown>;
-
-type State = {
-  hasNextPage: boolean;
-  isNextPageLoading: boolean;
-  items: { name: string }[];
-};
-
-class App extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      hasNextPage: true,
-      isNextPageLoading: false,
-      items: [],
-    };
-  }
-
-  _loadNextPage = () => {
-    return new Promise((resolve) => {
-      this.setState({ isNextPageLoading: true }, () => {
-        setTimeout(() => {
-          this.setState((state) => ({
-            hasNextPage: state.items.length < 100,
-            isNextPageLoading: false,
-            items: [...state.items].concat(
-              new Array(10).fill(true).map(() => ({ name: "Example name" }))
-            ),
-          }));
-          resolve(null);
-        }, 2500);
-      });
-    });
-  };
-
-  render() {
-    const { hasNextPage, isNextPageLoading, items } = this.state;
-
-    return (
-      <ExampleWrapper
-        hasNextPage={hasNextPage}
-        isNextPageLoading={isNextPageLoading}
-        items={items}
-        loadNextPage={this._loadNextPage}
-      />
-    );
-  }
-}
-
 const VirtualListsStory: React.FunctionComponent<Record<
   string,
   unknown
 >> = () => {
+  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
+  const [isNextPageLoading, setIsNextPageLoading] = useState<boolean>(false);
+  const [items, setItems] = useState<Item[]>([]);
+
+  const loadNextPage = useCallback(() => {
+    return new Promise((resolve) => {
+      setIsNextPageLoading(true);
+      setTimeout(() => {
+        setHasNextPage(items.length < 100);
+        setIsNextPageLoading(false);
+        setItems(
+          [...items].concat(
+            new Array(10).fill(true).map(() => ({ name: "Example name" }))
+          )
+        );
+        resolve(null);
+      }, 2500);
+    });
+  }, [items, isNextPageLoading]);
+
   return (
     <Story>
-      <App />
+      <ExampleWrapper
+        hasNextPage={hasNextPage}
+        isNextPageLoading={isNextPageLoading}
+        items={items}
+        loadNextPage={loadNextPage}
+      />
     </Story>
   );
 };
