@@ -7,6 +7,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint",
+    "plugin:react-hooks/recommended",
     // airbnb adds the react plugin which is why we need this.
     "prettier/react",
   ],
@@ -41,6 +42,7 @@ module.exports = {
     "no-console": "error",
     "react/jsx-filename-extension": ["error", { extensions: [".tsx"] }],
     "react/require-default-props": "off",
+    "react-hooks/exhaustive-deps": "error",
 
     // The following rules are disabled because we use TypeScript.
     "import/no-unresolved": "off",

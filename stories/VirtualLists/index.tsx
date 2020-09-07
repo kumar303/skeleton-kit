@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
@@ -19,11 +19,17 @@ type Item = {
   name: string;
 };
 
+function genLoaderKey() {
+  return `loader-${Math.random()}`;
+}
+
 const VirtualListsStory: React.FunctionComponent<Record<
   string,
   unknown
 >> = () => {
   const loadSpeed = getLoadSpeed();
+
+  const [loaderKey, setLoaderKey] = useState<string>(genLoaderKey());
 
   // Are there more items to load?
   // (This information comes from the most recent API request.)
@@ -36,16 +42,17 @@ const VirtualListsStory: React.FunctionComponent<Record<
   // Array of items loaded so far.
   const [items, setItems] = useState<Item[]>([]);
 
-  // If there are more items to be loaded then add an extra row to hold a loading indicator.
-  const itemCount = hasNextPage ? items.length + 1 : items.length;
+  // If there are more items to be loaded then add extra rows to hold the skeletons.
+  const itemCount = hasNextPage ? items.length + 10 : items.length;
 
   // Every row is loaded except for our loading indicator row.
   const isItemLoaded = (index: number) => !hasNextPage || index < items.length;
 
   // Callback function responsible for loading the next page of items.
-  const loadNextPage = useCallback(() => {
+  const loadNextPage = () => {
+    setIsNextPageLoading(true);
+
     return new Promise((resolve) => {
-      setIsNextPageLoading(true);
       setTimeout(() => {
         setHasNextPage(items.length < 100);
         setIsNextPageLoading(false);
@@ -53,7 +60,7 @@ const VirtualListsStory: React.FunctionComponent<Record<
         resolve(null);
       }, loadSpeed * 1000);
     });
-  }, [items, isNextPageLoading, loadSpeed]);
+  };
 
   // Only load 1 page of items at a time.
   // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
@@ -65,7 +72,11 @@ const VirtualListsStory: React.FunctionComponent<Record<
 
     return (
       <StyledItem altBg={Boolean(index % 2)} style={style}>
-        <Phrase showSkeletons={!isItemLoaded(index)} color={colors.black}>
+        <Phrase
+          initialCharCountRange={[12, 20]}
+          showSkeletons={!isItemLoaded(index)}
+          color={colors.black}
+        >
           {content}
         </Phrase>
       </StyledItem>
@@ -73,8 +84,9 @@ const VirtualListsStory: React.FunctionComponent<Record<
   };
 
   const seeInitial = () => {
+    // Reset the key mostly just to reset the scrollbars.
+    setLoaderKey(genLoaderKey());
     setItems([]);
-    loadNextPage();
   };
 
   return (
@@ -84,6 +96,7 @@ const VirtualListsStory: React.FunctionComponent<Record<
         <StyledList>
           <SkeletonGroup borderRadius="0.4rem">
             <InfiniteLoader
+              key={loaderKey}
               isItemLoaded={isItemLoaded}
               itemCount={itemCount}
               loadMoreItems={loadMoreItems}

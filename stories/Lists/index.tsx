@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { List, Phrase, Text, SkeletonGroup } from "../../src";
 import { Story, colors } from "../helpers/styles";
@@ -35,7 +35,7 @@ const ListsStory: React.FunctionComponent<Record<string, unknown>> = () => {
     setContentKey(initialContentKey);
   };
 
-  const loadNextSet = () => {
+  const loadNextSet = useCallback(() => {
     setLoadingState(true);
     setTimeout(() => {
       let i = dataIndex + 1;
@@ -47,7 +47,7 @@ const ListsStory: React.FunctionComponent<Record<string, unknown>> = () => {
       setLoadingState(false);
       setLoadingContentState(false);
     }, loadSpeed * 1000);
-  };
+  }, [dataIndex, loadSpeed]);
 
   const loadEmptySet = () => {
     setLoadingState(true);
@@ -66,9 +66,14 @@ const ListsStory: React.FunctionComponent<Record<string, unknown>> = () => {
     }, loadSpeed * 1000);
   };
 
-  useEffect(() => {
-    loadNextSet();
-  }, [loadSpeed]);
+  useEffect(
+    () => {
+      loadNextSet();
+    },
+    // This is kind of a hack to realod sets whenever loadSpeed changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [loadSpeed]
+  );
 
   const seeInitial = () => {
     resetState();
