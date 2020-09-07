@@ -44,6 +44,7 @@ module.exports = {
 
     // The following rules are disabled because we use TypeScript.
     "import/no-unresolved": "off",
+    "no-restricted-syntax": "off",
     "react/jsx-props-no-spreading": "off",
     "react/no-unused-prop-types": "off",
     "react/prop-types": "off",
