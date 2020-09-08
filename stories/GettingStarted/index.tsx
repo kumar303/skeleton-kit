@@ -21,8 +21,8 @@ import {
   WarnBlock,
 } from "./styles";
 import ListsExample from "../Examples-0-Lists.stories";
-import ImagesExample from "../Examples-1-Images.stories";
-// import TextExample from "../Examples-2-Text.stories";
+import ImagesExample from "../Examples-2-Images.stories";
+// import TextExample from "../Examples-3-Text.stories";
 
 const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
   const [isLoading, setLoadingState] = useState<boolean>(true);
