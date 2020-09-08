@@ -21,6 +21,7 @@ import {
   WarnBlock,
 } from "./styles";
 import ListsExample from "../Examples-0-Lists.stories";
+import VirtualListsExample from "../Examples-1-VirtualLists.stories";
 import ImagesExample from "../Examples-2-Images.stories";
 // import TextExample from "../Examples-3-Text.stories";
 
@@ -111,7 +112,14 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
               <LinkTo kind={ListsExample.title}>Lists</LinkTo>
             </ExampleLink>
             <ExampleDef>
-              Work with common layouts, including lists of unknown lengths
+              Work with common layouts, including basic text and lists of
+              unknown lengths
+            </ExampleDef>
+            <ExampleLink>
+              <LinkTo kind={VirtualListsExample.title}>Virtual Lists</LinkTo>
+            </ExampleLink>
+            <ExampleDef>
+              Work with virtual list patterns such as infinite loading
             </ExampleDef>
             <ExampleLink>
               <LinkTo kind={ImagesExample.title}>Images</LinkTo>
@@ -126,13 +134,8 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           </ExampleGrid>
           <H3>TODO / ideas</H3>
           <DashedUL>
-            <LI>Add interface documentation</LI>
+            <LI>Add interface documentation (forthcoming when stable)</LI>
             <LI>Make the interface a little less verbose</LI>
-            <LI>
-              Make sure virtual lists are well supported (
-              <a href="https://github.com/kumar303/skeleton-kit/issues/1">#1</a>
-              )
-            </LI>
             <LI>
               Recall stored state to make initial skeletons nicer (
               <a href="https://github.com/kumar303/skeleton-kit/issues/10">
