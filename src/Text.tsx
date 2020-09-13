@@ -29,6 +29,8 @@ const Text = componentWithDefaults<Props>()(
     style,
     ...groupProps
   }) => {
+    const attrs = { className, style };
+
     return (
       <MaybeSkeletonGroup {...groupProps}>
         <MaybeSkeleton
@@ -64,17 +66,13 @@ const Text = componentWithDefaults<Props>()(
           }}
           normalContent={children}
           renderNormalContent={(content) => {
-            return (
-              <span className={className} style={style}>
-                {content}
-              </span>
-            );
+            return <span {...attrs}>{content}</span>;
           }}
           renderSkeleton={
             renderSkeleton ??
             ((content) => {
               return (
-                <Skeleton className={className} style={style}>
+                <Skeleton {...attrs}>
                   <InvisibleText>{content}</InvisibleText>
                 </Skeleton>
               );
