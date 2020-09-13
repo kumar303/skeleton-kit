@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { CSSProperties, keyframes } from "styled-components";
 
 // TODO: make opacity configurable.
 // See https://github.com/kumar303/skeleton-kit/issues/13
@@ -24,7 +24,9 @@ const pulseOpacity = keyframes`
   }
 `;
 
-const OpacityPulse = styled.span.attrs((props) => {
+// TODO: make this into a wrapper that uses MaybeSkeletonGroup so that
+// the tests won't have to create a SkeletonGroup.
+const OpacityPulse = styled.span.attrs((props): { style: CSSProperties } => {
   const max = props.theme.skeletonKit.loopDurationMaxSec;
   const min = props.theme.skeletonKit.loopDurationMinSec;
   const range = max - min;
