@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 
 import OpacityPulse from "./OpacityPulse";
 import { ChildrenType } from "./utils/typeUtils";
@@ -13,10 +13,19 @@ const StyledSpan = styled(OpacityPulse)`
 export interface Props {
   children?: ChildrenType;
   className?: string;
+  style?: CSSProperties;
 }
 
-const Skeleton: React.FunctionComponent<Props> = ({ children, className }) => {
-  return <StyledSpan className={className}>{children}</StyledSpan>;
+const Skeleton: React.FunctionComponent<Props> = ({
+  children,
+  className,
+  style,
+}) => {
+  return (
+    <StyledSpan className={className} style={style}>
+      {children}
+    </StyledSpan>
+  );
 };
 
 export default Skeleton;

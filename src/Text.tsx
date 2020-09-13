@@ -1,4 +1,5 @@
 import React from "react";
+import { CSSProperties } from "styled-components";
 
 import InvisibleText from "./InvisibleText";
 import Skeleton from "./Skeleton";
@@ -14,6 +15,7 @@ export interface Props extends MaybeSkeletonGroupProps {
   className?: string;
   defaultInitialCharCount: number;
   renderSkeleton?: RenderSkeleton;
+  style?: CSSProperties;
 }
 
 export const defaultProps: Partial<Props> = { defaultInitialCharCount: 200 };
@@ -24,8 +26,11 @@ const Text = componentWithDefaults<Props>()(
     defaultInitialCharCount,
     className,
     renderSkeleton,
+    style,
     ...groupProps
   }) => {
+    const attrs = { className, style };
+
     return (
       <MaybeSkeletonGroup {...groupProps}>
         <MaybeSkeleton
@@ -61,13 +66,13 @@ const Text = componentWithDefaults<Props>()(
           }}
           normalContent={children}
           renderNormalContent={(content) => {
-            return <span className={className}>{content}</span>;
+            return <span {...attrs}>{content}</span>;
           }}
           renderSkeleton={
             renderSkeleton ??
             ((content) => {
               return (
-                <Skeleton className={className}>
+                <Skeleton {...attrs}>
                   <InvisibleText>{content}</InvisibleText>
                 </Skeleton>
               );

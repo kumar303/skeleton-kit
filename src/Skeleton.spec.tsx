@@ -22,6 +22,13 @@ describe(__filename, () => {
     expect(root.childAt(0)).toHaveClassName(className);
   });
 
+  it("adds a style attribute", () => {
+    const style = { color: "rebeccapurple" };
+    const root = render({ style });
+
+    expect(root.childAt(0)).toHaveProp("style", style);
+  });
+
   it("lets you change the color", () => {
     const color = "rebeccapurple";
     const root = render({ color });
