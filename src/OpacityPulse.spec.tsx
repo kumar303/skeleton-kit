@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 import { SkeletonGroup } from ".";
 import OpacityPulse from "./OpacityPulse";
@@ -47,5 +47,16 @@ describe(__filename, () => {
     expect(caught.message).toEqual(
       "loopDurationMinSec (2) cannot be greater than loopDurationMax (1)"
     );
+  });
+
+  it("accepts a style prop", () => {
+    const style = { color: "rebeccapurple" };
+    expect(
+      shallow(
+        <SkeletonGroup>
+          <OpacityPulse style={style} />
+        </SkeletonGroup>
+      ).find(OpacityPulse)
+    ).toHaveProp("style", style);
   });
 });
