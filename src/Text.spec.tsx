@@ -55,6 +55,17 @@ describe(__filename, () => {
     expect(root.find("span").find(`.${className}`)).toHaveLength(1);
   });
 
+  it("adds a style attribute when showing skeletons", () => {
+    const className = "ObjectId";
+    const style = { color: "rebeccapurple" };
+    const root = render({ className, style });
+
+    expect(root.find("span").find(`.${className}`)).toHaveProp(
+      "style",
+      expect.objectContaining(style)
+    );
+  });
+
   it("adds className when rendering normal content", () => {
     const className = "MyCoolClass";
     const renderNormalContent = getRenderedMaybeProp<RenderNormalContent>(
@@ -64,6 +75,18 @@ describe(__filename, () => {
     const root = shallow(<span>{renderNormalContent("Example content")}</span>);
 
     expect(root.find(`.${className}`)).toHaveLength(1);
+  });
+
+  it("adds a style attribute when rendering normal content", () => {
+    const className = "ObjectId";
+    const style = { color: "rebeccapurple" };
+    const renderNormalContent = getRenderedMaybeProp<RenderNormalContent>(
+      shallowRender({ className, style }),
+      "renderNormalContent"
+    );
+    const root = shallow(<span>{renderNormalContent("Example content")}</span>);
+
+    expect(root.find(`.${className}`)).toHaveProp("style", style);
   });
 
   it("generates initial content using genSentence()", () => {
