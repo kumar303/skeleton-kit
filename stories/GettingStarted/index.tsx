@@ -6,6 +6,7 @@ import LinkTo from "@storybook/addon-links/react";
 import { Phrase, Text, SkeletonGroup } from "../../src";
 import { Story, colors } from "../helpers/styles";
 import {
+  CodeBlock,
   DashedUL,
   EmojiItem,
   ExampleDef,
@@ -33,6 +34,8 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
       setLoadingState(false);
     }, 2000);
   });
+
+  const installDeps = "skeleton-kit react react-dom styled-components";
 
   return (
     <Story>
@@ -102,9 +105,26 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           <P>
             <WarnBlock>
               This library is in preview mode as the interface evolves rapidly.
-              Please file an issue before submitting a pull request. Thanks for
-              your interest!
             </WarnBlock>
+            <P>
+              Install <code>skeleton-kit</code> and its peer dependencies:
+            </P>
+            <P>
+              <CodeBlock>npm install --save {installDeps}</CodeBlock>
+            </P>
+            <P>or</P>
+            <P>
+              <CodeBlock>yarn add {installDeps}</CodeBlock>
+            </P>
+            <P>
+              While{" "}
+              <a href="https://styled-components.com/">styled-components</a>{" "}
+              doesn&apos;t require Webpack, you may want to research their{" "}
+              <a href="https://styled-components.com/docs/tooling#babel-plugin">
+                Babel plugin
+              </a>{" "}
+              which adds some optimizations.
+            </P>
           </P>
           <H3>Examples</H3>
           <ExampleGrid>
@@ -134,6 +154,13 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           </ExampleGrid>
           <H3>TODO / ideas</H3>
           <DashedUL>
+            <LI>
+              Fix remaining performance issues (
+              <a href="https://github.com/kumar303/skeleton-kit/issues/21">
+                #21
+              </a>
+              )
+            </LI>
             <LI>Add interface documentation (forthcoming when stable)</LI>
             <LI>Make the interface a little less verbose</LI>
             <LI>

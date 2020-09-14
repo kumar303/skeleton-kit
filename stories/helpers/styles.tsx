@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   code {
-    font-family: Courier, Monaco, monospace;
+    font-family: source-code-pro, Menlo, Monaco, Courier, monospace;
   }
 
   em {
@@ -81,6 +81,10 @@ const GlobalStyle = createGlobalStyle`
     &:hover {
       text-decoration: none;
     }
+  }
+
+  code, div, ul, li, ol, p {
+    font-size: 1.25rem;
   }
 `;
 

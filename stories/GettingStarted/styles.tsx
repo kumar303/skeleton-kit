@@ -4,6 +4,14 @@ import styled from "styled-components";
 import { colors } from "../helpers/styles";
 
 const INDENT = 3;
+const radius = "0.4rem";
+
+export const CodeBlock = styled.code`
+  background-color: ${colors.panelGray};
+  border-radius: ${radius};
+  display: flex;
+  padding: 1rem;
+`;
 
 export const Title = styled.h2`
   color: ${colors.darkBlue};
@@ -20,15 +28,16 @@ export const H3 = styled.h3`
 `;
 
 export const P = styled.p`
-  font-size: 1.25rem;
   line-height: 1.5;
   margin-bottom: 1rem;
 `;
 
 export const WarnBlock = styled.div`
-  border-radius: 0.4rem;
+  border-radius: ${radius};
   background-color: ${colors.lightPink};
+  display: flex;
   font-weight: bold;
+  margin-bottom: 1rem;
   padding: 1rem;
 `;
 
