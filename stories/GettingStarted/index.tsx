@@ -110,11 +110,20 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
               Install <code>skeleton-kit</code> and its peer dependencies:
             </P>
             <P>
-              <CodeBlock>npm install {installDeps}</CodeBlock>
+              <CodeBlock>npm install --save {installDeps}</CodeBlock>
             </P>
             <P>or</P>
             <P>
               <CodeBlock>yarn add {installDeps}</CodeBlock>
+            </P>
+            <P>
+              While{" "}
+              <a href="https://styled-components.com/">styled-components</a>{" "}
+              doesn&apos;t require Webpack, you may want to research their{" "}
+              <a href="https://styled-components.com/docs/tooling#babel-plugin">
+                Babel plugin
+              </a>{" "}
+              which adds some optimizations.
             </P>
           </P>
           <H3>Examples</H3>
@@ -145,6 +154,13 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           </ExampleGrid>
           <H3>TODO / ideas</H3>
           <DashedUL>
+            <LI>
+              Fix remaining performance issues (
+              <a href="https://github.com/kumar303/skeleton-kit/issues/21">
+                #21
+              </a>
+              )
+            </LI>
             <LI>Add interface documentation (forthcoming when stable)</LI>
             <LI>Make the interface a little less verbose</LI>
             <LI>
