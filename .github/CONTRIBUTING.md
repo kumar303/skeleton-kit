@@ -57,7 +57,7 @@ GH_TOKEN=[your_token] yarn deploy-storybook
 - Make sure all PRs have been merged
 - Edit `package.json` and increment the version
 - If there are breaking changes since the last release, make it a major release according to [semver](https://semver.org/) guidelines
-- [Create a new release](https://github.com/kumar303/skeleton-kit/releases/new) from GitHub and title it like `v1.0.0`
+- [Create a new release](https://github.com/kumar303/skeleton-kit/releases/new) from GitHub with a tag and title like `v1.0.0`
 - List all changes for the version
 - Check out that tag locally and run `yarn publish`
 - TODO: [automate this](https://github.com/kumar303/skeleton-kit/issues/19)
