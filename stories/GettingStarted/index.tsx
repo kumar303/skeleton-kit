@@ -6,6 +6,7 @@ import LinkTo from "@storybook/addon-links/react";
 import { Phrase, Text, SkeletonGroup } from "../../src";
 import { Story, colors } from "../helpers/styles";
 import {
+  CodeBlock,
   DashedUL,
   EmojiItem,
   ExampleDef,
@@ -33,6 +34,8 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
       setLoadingState(false);
     }, 2000);
   });
+
+  const installDeps = "skeleton-kit react react-dom styled-components";
 
   return (
     <Story>
@@ -102,9 +105,17 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           <P>
             <WarnBlock>
               This library is in preview mode as the interface evolves rapidly.
-              Please file an issue before submitting a pull request. Thanks for
-              your interest!
             </WarnBlock>
+            <P>
+              Install <code>skeleton-kit</code> and its peer dependencies:
+            </P>
+            <P>
+              <CodeBlock>npm install {installDeps}</CodeBlock>
+            </P>
+            <P>or</P>
+            <P>
+              <CodeBlock>yarn add {installDeps}</CodeBlock>
+            </P>
           </P>
           <H3>Examples</H3>
           <ExampleGrid>

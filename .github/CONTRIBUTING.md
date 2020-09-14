@@ -51,3 +51,12 @@ To deploy the Storybook build, first create a [GitHub token](https://github.com/
 ```
 GH_TOKEN=[your_token] yarn deploy-storybook
 ```
+
+## Create a release
+
+- Make sure all PRs have been merged
+- Edit `package.json` and increment the version
+- If there are breaking changes since the last release, make it a major release according to [semver](https://semver.org/) guidelines
+- [Create a new release](https://github.com/kumar303/skeleton-kit/releases/new) from GitHub
+- Check out that tag and run `yarn publish`
+- TODO: [automate this](https://github.com/kumar303/skeleton-kit/issues/19)
