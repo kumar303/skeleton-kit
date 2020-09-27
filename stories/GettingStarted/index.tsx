@@ -203,6 +203,18 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
               </span>
             </LI>
           </DashedUL>
+          <H3>Your own skeletons are out of sync</H3>
+          <P>
+            Yep, the skeletons for the navigation on this page do not match the
+            final layout. Thanks for noticing. These are implemented deep within{" "}
+            <a href="https://storybook.js.org/">Storybook</a> and I haven&apos;t
+            looked to see if they&apos;re customizable yet 😅.
+          </P>
+          <P>
+            See?! Everyone has a hard time implementing skeleton screens. Even{" "}
+            <a href="https://www.youtube.com/">YouTube</a> is off by about 2
+            pixels at the time of this writing.
+          </P>
         </Main>
       </SkeletonGroup>
     </Story>
