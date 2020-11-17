@@ -1,4 +1,4 @@
-name: Test
+name: CICD
 on:
   push:
     branches:
@@ -28,3 +28,18 @@ jobs:
           CI: true
       - run: yarn lint
       - run: yarn prettier-check
+
+  deploy:
+    needs: test
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Install deps
+        run: yarn install
+      - name: Deploy storybook
+        run: yarn deploy-storybook --ci
+        env:
+          GH_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
