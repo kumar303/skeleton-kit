@@ -35,7 +35,6 @@ export const P = styled.p`
 export const WarnBlock = styled.div`
   border-radius: ${radius};
   background-color: ${colors.lightPink};
-  display: flex;
   font-weight: bold;
   margin-bottom: 1rem;
   padding: 1rem;

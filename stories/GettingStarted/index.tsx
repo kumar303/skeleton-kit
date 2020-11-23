@@ -104,7 +104,9 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
           <H3>Installation</H3>
           <P>
             <WarnBlock>
-              This library is in preview mode as the interface evolves rapidly.
+              This library is currently experimental while we prove out some
+              concepts. All breaking changes will follow{" "}
+              <a href="https://semver.org/">semver</a> conventions.
             </WarnBlock>
             <P>
               Install <code>skeleton-kit</code> and its peer dependencies:
@@ -119,7 +121,7 @@ const GettingStarted: React.FunctionComponent<Record<string, unknown>> = () => {
             <P>
               While{" "}
               <a href="https://styled-components.com/">styled-components</a>{" "}
-              doesn&apos;t require Webpack, you may want to research their{" "}
+              doesn&apos;t require a build step, you may want to research their{" "}
               <a href="https://styled-components.com/docs/tooling#babel-plugin">
                 Babel plugin
               </a>{" "}
