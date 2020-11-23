@@ -38,6 +38,10 @@ export const WarnBlock = styled.div`
   font-weight: bold;
   margin-bottom: 1rem;
   padding: 1rem;
+
+  a {
+    color: ${colors.black};
+  }
 `;
 
 export const Heading = styled.div`
