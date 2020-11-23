@@ -46,7 +46,9 @@ yarn prettier-check
 
 ## Deploying Storybook
 
-To deploy the Storybook build, first create a [GitHub token](https://github.com/settings/tokens/new?scopes=repo) with all `repo` scopes. Run this from the `main` branch to deploy:
+Storybook is automatically deployed to [GitHub Pages](https://kumar303.github.io/skeleton-kit/) any time a change lands on the `main` branch.
+
+To manually deploy a Storybook build, first create a [GitHub token](https://github.com/settings/tokens/new?scopes=repo,workflow) with all `repo` and `workflow` scopes. Run this from the `main` branch to deploy:
 
 ```
 GH_TOKEN=[your_token] yarn deploy-storybook
